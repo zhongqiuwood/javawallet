@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
+ORIGINAL_DIR=$PWD
 cd src/main/java
-
-#ln -snfv src/main/java/com/okcoin/vault/jni/xmr/Moneroj.java Moneroj.java
-
 javah -jni com.okcoin.vault.jni.xmr.Moneroj
-
-mv com_okcoin_vault_jni_xmr_Moneroj.h ../../..
+mv com_okcoin_vault_jni_xmr_Moneroj.h $ORIGINAL_DIR
