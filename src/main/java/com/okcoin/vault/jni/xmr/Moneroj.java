@@ -1,6 +1,8 @@
 package com.okcoin.vault.jni.xmr;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 class Moneroj {
 
@@ -260,10 +262,7 @@ class Moneroj {
 
 
     public static final String HOT_WALLET =
-            "/Users/zhongqiu/go/src/github.com/monero-project/monero/src/javawallet/wallet_hot/hot";
-
-    public static final String COLD_WALLET =
-            "/Users/zhongqiu/go/src/github.com/monero-project/monero/src/javawallet/wallet_cold/cold";
+            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/hot/hot";
 
     public static final String SPEND_KEY =
             "2ecf6967f6697795647ac61bc5a5323f0c2c5f835e68d00072db1d85c1855305";
