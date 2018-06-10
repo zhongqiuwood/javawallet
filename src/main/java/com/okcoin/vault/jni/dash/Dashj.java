@@ -1,3 +1,4 @@
+package com.okcoin.vault.jni.dash;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ class Dashj {
         // "\"privatekey\"   (string) private key in base58-encoding\n"
         // "      ,...\n"
         // "    ]\n"
-        String priKeys = "[\"7qYrzJZWqnyCWMYswFcqaRJypGdVceudXPSxmZKsngN7fyo7aAV\"]"
+        String priKeys = "[\"7qYrzJZWqnyCWMYswFcqaRJypGdVceudXPSxmZKsngN7fyo7aAV\"]";
         //". \"prevtxs\" An json array of previous dependent transaction outputs\n
         // [               (json array of json objects, or 'null' if none provided)\n"
         // {\n"
