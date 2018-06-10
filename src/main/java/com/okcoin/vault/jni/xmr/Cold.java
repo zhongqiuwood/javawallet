@@ -1,3 +1,4 @@
+package com.okcoin.vault.jni.xmr;
 
 import java.util.ArrayList;
 import java.util.List;

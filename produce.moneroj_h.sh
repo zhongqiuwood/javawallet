@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-ln -snfv src/main/java/Moneroj.java Moneroj.java
+cd src/main/java
 
-javah -jni Moneroj
+#ln -snfv src/main/java/com/okcoin/vault/jni/xmr/Moneroj.java Moneroj.java
 
-rm Moneroj.java
+javah -jni com.okcoin.vault.jni.xmr.Moneroj
 
-mv Moneroj.h ../wallet
-
+mv com_okcoin_vault_jni_xmr_Moneroj.h ../../..
