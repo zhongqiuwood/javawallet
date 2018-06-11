@@ -1,17 +1,17 @@
-package com.okcoin.vault.jni.dash;
+package com.okcoin.vault.jni.digibyte;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-class Dashj {
+class Digibytej {
 
     public static void main(String[] args) {
 
         String priKey = "XCrnZDUC6HEob4iWi5vdPMnMc3WwTqUyPXMp1G4BbJiF5CzZsNHh";
-        Dashj dashj = new Dashj();
-        String address = dashj.GetAddressByPrivateKey(priKey);
+        Digibytej digibytej = new Digibytej();
+        String address = digibytej.GetAddressByPrivateKey(priKey);
         // should equal "XhNYtJg6RU8DV5181UspZcb2J78fcBDfJt"
         System.out.println(address);
 
@@ -39,15 +39,14 @@ class Dashj {
         String preTxs = "[{\"txid\":\"4d49a71ec9da436f71ec4ee231d04f292a29cd316f598bb7068feccabdc59485\",\"vout\":0,\"scriptPubKey\":\"76a91491b24bf9f5288532960ac687abb035127b1d28a588ac\"}]";
         //SignTx(inputJson, outputJson, "", priKeys, preTxs);
 
-        // {"ALL", SIGHASH_ALL},
-        // {"NONE", SIGHASH_NONE},
-        // {"SINGLE", SIGHASH_SINGLE},
-        // {"ALL|ANYONECANPAY", SIGHASH_ALL|SIGHASH_ANYONECANPAY},
-        // {"NONE|ANYONECANPAY", SIGHASH_NONE|SIGHASH_ANYONECANPAY},
-        // {"SINGLE|ANYONECANPAY", SIGHASH_SINGLE|SIGHASH_ANYONECANPAY},
+       // {"ALL", SIGHASH_ALL},
+       // {"NONE", SIGHASH_NONE},
+       // {"SINGLE", SIGHASH_SINGLE},
+       // {"ALL|ANYONECANPAY", SIGHASH_ALL|SIGHASH_ANYONECANPAY},
+       // {"NONE|ANYONECANPAY", SIGHASH_NONE|SIGHASH_ANYONECANPAY},
+       // {"SINGLE|ANYONECANPAY", SIGHASH_SINGLE|SIGHASH_ANYONECANPAY},
         String signType = "ALL";
-
-        dashj.SignTranscation(inputList, outputList, "", priKey, preTxs, signType);
+        digibytej.SignTranscation(inputList, outputList, "", priKey, preTxs, signType);
     }
 
     public static String byteArray2String(byte[] input) {
@@ -82,7 +81,7 @@ class Dashj {
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load("/Users/shine/Desktop/code/dash/src/dash_tx.dylib");
+        System.load("/Users/shine/Desktop/code/dash/src/digibyte_tx.dylib");
     }
 
     /**
