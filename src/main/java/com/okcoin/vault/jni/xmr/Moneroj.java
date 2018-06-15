@@ -1,5 +1,7 @@
 package com.okcoin.vault.jni.xmr;
 
+import com.okcoin.vault.jni.common.Util;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,10 @@ class Moneroj {
 
             if (createWallet) {
                 result = c.createWallet();
-                Moneroj.dump("create cold wallet", result);
+                Util.dump("create cold wallet", result);
 
                 result = h.createWallet();
-                Moneroj.dump("create hot wallet", result);
+                Util.dump("create hot wallet", result);
             }
 
             System.out.printf("========================================================================================\n");
@@ -132,16 +134,6 @@ class Moneroj {
 
         }
         return res;
-    }
-
-    public static void dump(String context, String[] result) {
-
-        System.out.printf("//-------------------------------------------------------\n");
-        System.out.println("// Dump result return from JNI: " + context);
-        for (int i = 0; i < result.length; ++i) {
-            System.out.println("// " + result[i]);
-        }
-        System.out.println("//-------------------------------------------------------");
     }
 
     static {

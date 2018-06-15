@@ -1,5 +1,7 @@
 package com.okcoin.vault.jni.qtum;
 
+import com.okcoin.vault.jni.common.Util;
+
 public class Qtumj {
 
     static {
@@ -8,27 +10,19 @@ public class Qtumj {
 
     static public native String[] execute(String networkType, String command);
 
-    public static void dump(String context, String[] result) {
-
-        System.out.printf("//-------------------------------------------------------\n");
-        System.out.println("// Dump result return from JNI: " + context);
-        for (int i = 0; i < result.length; ++i) {
-            System.out.println("// " + result[i]);
-        }
-        System.out.println("//-------------------------------------------------------");
-    }
 
     public static void executeCommand(String networkType, String cmd, String context) {
 
         String[] results = Qtumj.execute(networkType, cmd);
-        Qtumj.dump(context, results);
+        Util.dump(context, results);
     }
 
     public static void main(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
-            String cmd = "addmultisigaddress 2 [\"03093bd8a834216f8ead1dfa4c8522f554357a8cad561a47fb035135b8e65506cc\",\"0220ac8980f225b4ad23057f7ae1cea8492306113ae9e49a90d184005d95c19846\"]";
+            String cmd = "addmultisigaddress 2 [\"03093bd8a834216f8ead1dfa4c8522f554357a8cad561a47fb035135b8e65506cc\"," +
+                    "\"0220ac8980f225b4ad23057f7ae1cea8492306113ae9e49a90d184005d95c19846\"]";
             Qtumj.executeCommand(networkType, cmd, "addmultisigaddress");
 
 //            String pk = "L25c2U81YS4TxgBKRC4jj4EUeBB2JU9SD7WLFWQU22EfBohJn6MJ";
