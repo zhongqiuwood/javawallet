@@ -9,19 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     com_okcoin_vault_jni_digibyte_Digibytej
- * Method:    GetAddressByPrivateKey
- * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ * Method:    execute
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_okcoin_vault_jni_digibyte_Digibytej_GetAddressByPrivateKey
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     com_okcoin_vault_jni_digibyte_Digibytej
- * Method:    SignTranscation
- * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_okcoin_vault_jni_digibyte_Digibytej_SignTranscation
-  (JNIEnv *, jobject, jstring, jstring, jstring, jstring, jstring, jstring);
+JNIEXPORT jobjectArray JNICALL Java_com_okcoin_vault_jni_digibyte_Digibytej_execute
+  (JNIEnv *, jclass, jstring, jstring);
 
 #ifdef __cplusplus
 }
