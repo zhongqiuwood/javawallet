@@ -2,25 +2,36 @@
 
 ### xmr
 ```
-git clone https://github.com/okblockchainlab/monero.git
+git clone https://github.com/okblockchainlab/monero
 cd monero
 ./runbuild.sh
-ls src/libwallet.so
-ls src/libwallet.dylib
+ls src/*.so
+ls src/*.dylib
 ```
 
 ### dash
 ```
-git clone https://github.com/okblockchainlab/dash.git
+git clone https://github.com/okblockchainlab/dash
 cd dash
 ./runbuild.sh
+ls src/*.so
+ls src/*.dylib
+```
+
+### digibyte
+```
+git clone https://github.com/okblockchainlab/digibyte
+cd digibyte
+./runbuild.sh
+ls src/*.so
+ls src/*.dylib
 ```
 
 ### qtum
 ```
-git clone https://github.com/okblockchainlab/qtum.git
+git clone https://github.com/okblockchainlab/qtum
 cd qtum
 ./runbuild.sh
-ls src/qtumd.so
-ls src/qtumd.dylib
+ls src/*.so
+ls src/*.dylib
 ```

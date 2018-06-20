@@ -11,9 +11,9 @@ class Dashj {
 
         String priKey = "XCrnZDUC6HEob4iWi5vdPMnMc3WwTqUyPXMp1G4BbJiF5CzZsNHh";
         Dashj dashj = new Dashj();
-        String address = dashj.GetAddressByPrivateKey(priKey);
+//        String address = dashj.GetAddressByPrivateKey(priKey);
         // should equal "XhNYtJg6RU8DV5181UspZcb2J78fcBDfJt"
-        System.out.println(address);
+//        System.out.println(address);
 
 
         //list format txid:vout,txid:vout
@@ -47,7 +47,7 @@ class Dashj {
         // {"SINGLE|ANYONECANPAY", SIGHASH_SINGLE|SIGHASH_ANYONECANPAY},
         String signType = "ALL";
 
-        dashj.SignTranscation(inputList, outputList, "", priKey, preTxs, signType);
+//        dashj.SignTranscation(inputList, outputList, "", priKey, preTxs, signType);
     }
 
     public static String byteArray2String(byte[] input) {
@@ -72,29 +72,9 @@ class Dashj {
 
 
     static {
-        // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
-        // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load("/Users/shine/Desktop/code/dash/src/dash_tx.dylib");
+        System.load("/Users/shine/Desktop/code/dash/src/dashd.dylib");
     }
 
-    /**
-     * 利用私钥获取钱包地址
-     * @return 返回钱包的地址
-     * @priKey base58 private key
-     */
-    public native String GetAddressByPrivateKey(String priKey);
+    static public native String[] execute(String networkType, String command);
 
-    /**
-     * 签名交易
-     * @param：参加main函数的demo
-     * @return 返回hex值包括： signed tx
-     */
-    public native String SignTranscation(
-            String inputList,
-            String outAddrList,
-            String outDataList,
-            String priKeysJson,
-            String prevTxsJson,
-            String signType
-    );
 }
