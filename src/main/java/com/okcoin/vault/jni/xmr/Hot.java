@@ -37,7 +37,7 @@ class Hot extends WalletBase {
     public byte[] exportOutputs(String offsetTxid) throws UnsupportedEncodingException {
         params = createHotWalletParams();
         params.add("export_outputs");
-        params.add("wallet_hot/op");
+        params.add("dummy");
 
         if (offsetTxid != null && offsetTxid.length() > 0) {
             params.add(offsetTxid);
@@ -50,7 +50,7 @@ class Hot extends WalletBase {
     public void importKeyImages(byte[] keyImages, String offsetTxid) {
         params = createHotWalletParams();
         params.add("import_key_images");
-        params.add("wallet_hot/ki");
+        params.add("dummy");
 
         if (offsetTxid != null && offsetTxid.length() > 0) {
             params.add(offsetTxid);

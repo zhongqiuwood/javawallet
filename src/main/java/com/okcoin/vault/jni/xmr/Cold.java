@@ -34,7 +34,7 @@ class Cold extends WalletBase {
     public byte[] exportKeyImagesByOutputs(byte[] outputs) {
         params = createColdWalletParams();
         params.add("import_outputs");
-        params.add("wallet_cold/op");
+        params.add("dummy");
         byte[][] res = xmrj.transcation(params.toArray(), Moneroj.XMR_TX_OUTPUTS, outputs,null, null);
         return res[res.length - 1];
     }

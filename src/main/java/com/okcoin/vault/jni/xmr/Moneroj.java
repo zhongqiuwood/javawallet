@@ -139,7 +139,7 @@ class Moneroj {
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load("/Users/oak/go/src/github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib");
+        System.load("/Users/oak/go/src/github.com/okblockchainlab/monero/build/debug/src/wallet/libwallet.dylib");
     }
 
     /**
