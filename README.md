@@ -35,3 +35,10 @@ cd qtum
 ls src/*.so
 ls src/*.dylib
 ```
+### zcash
+```
+git clone https://github.com/okblockchainlab/zcash
+cd zcash/src
+make -f Makefile_src
+ls *.so
+ls *.dylib
