@@ -36,7 +36,7 @@ ls src/*.so
 ls src/*.dylib
 ```
 
-### stella
+### stellar
 ```
 git clone --recursive https://github.com/okblockchainlab/stellar-core.git  
 cd stellar-core/ok-wallet  
