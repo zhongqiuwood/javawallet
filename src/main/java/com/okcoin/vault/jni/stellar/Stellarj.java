@@ -16,7 +16,7 @@ public class Stellarj {
     static String cmd = null;
 
     static {
-        System.load("/Users/oker/code/okbc/stellar-core/ok-wallet/build/libstellar-wlt.so");
+        System.load("/Users/oker/code/okbc/stellar-core/ok-wallet/build/libstellar-core.dylib");
     }
 
     static public native String[] execute(String networkType, String command);
