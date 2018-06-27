@@ -35,3 +35,15 @@ cd qtum
 ls src/*.so
 ls src/*.dylib
 ```
+
+### stella
+```
+git clone --recursive https://github.com/okblockchainlab/stellar-core.git  
+cd stellar-core/ok-wallet  
+mkdir build  
+cd build  
+cmake ..  
+make  
+ls *.so  
+ls *.dylib
+```
