@@ -42,6 +42,7 @@ cd zcash/src
 make -f Makefile_src
 ls *.so
 ls *.dylib
+```
 
 ### stellar
 ```
