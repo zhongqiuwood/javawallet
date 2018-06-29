@@ -42,3 +42,16 @@ cd zcash/src
 make -f Makefile_src
 ls *.so
 ls *.dylib
+```
+
+### stellar
+```
+git clone --recursive https://github.com/okblockchainlab/stellar-core.git
+cd stellar-core/ok-wallet
+mkdir build
+cd build
+cmake ..
+make
+ls *.so
+ls *.dylib
+```
