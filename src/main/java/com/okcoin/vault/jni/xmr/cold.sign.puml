@@ -1,0 +1,28 @@
+@startuml
+
+ColdWallet -> ColdWallet: create
+HotWallet -> HotWallet: create
+
+
+HotWallet -> HotWallet: sync blocks
+HotWallet -> HotWallet: export_outputs
+HotWallet -> ColdWallet: send outputs
+
+
+ColdWallet -> ColdWallet: import_outputs
+ColdWallet -> ColdWallet: export_keyimages
+
+ColdWallet -> HotWallet: send keyimages
+
+HotWallet -> HotWallet: import_keyimages
+
+HotWallet -> HotWallet: use transfer to \ngenerate unsigned_monero_tx
+HotWallet -> ColdWallet: send unsigned_monero_tx
+
+ColdWallet -> ColdWallet: sign: use unsigned_monero_tx \nto generate signed_monero_tx
+ColdWallet -> HotWallet: send signed_monero_tx
+
+HotWallet -> MainChain: submit signed_monero_tx
+
+
+@enduml
