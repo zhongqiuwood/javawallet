@@ -1,28 +1,30 @@
 @startuml
 
-ColdWallet -> ColdWallet: create
-HotWallet -> HotWallet: create
+ColdWallet -> ColdWallet: created in /cold by \n <--daemon-address nobody\n --generate-from-spend-key /cold/coldwallet>
+HotWallet -> HotWallet: created in /hot by \n <--generate-from-view-key /hot/hotwallet>
 
 
-HotWallet -> HotWallet: sync blocks
-HotWallet -> HotWallet: export_outputs
-HotWallet -> ColdWallet: send outputs
+HotWallet -> monerod: go to monerod to sync updated blocks
+monerod --> HotWallet:
+
+HotWallet -> HotWallet: --command export_outputs /hot/outputs
+HotWallet -> ColdWallet: cp /hot/outputs /cold
 
 
-ColdWallet -> ColdWallet: import_outputs
-ColdWallet -> ColdWallet: export_keyimages
+ColdWallet -> ColdWallet: --command import_outputs /cold/outputs
+ColdWallet -> ColdWallet: --command export_keyimages /cold/keyimages
 
-ColdWallet -> HotWallet: send keyimages
+ColdWallet -> HotWallet: cp /cold/keyimages /hot
 
-HotWallet -> HotWallet: import_keyimages
+HotWallet -> HotWallet: --command import_keyimages /hot/keyimages
 
-HotWallet -> HotWallet: use transfer to \ngenerate unsigned_monero_tx
-HotWallet -> ColdWallet: send unsigned_monero_tx
+HotWallet -> HotWallet: use <--command transfer unimportant> to \ngenerate unsigned_monero_tx
+HotWallet -> ColdWallet: cp /hot/unsigned_monero_tx /cold
 
-ColdWallet -> ColdWallet: sign: use unsigned_monero_tx \nto generate signed_monero_tx
-ColdWallet -> HotWallet: send signed_monero_tx
+ColdWallet -> ColdWallet: sign: use <--command sign> \nto generate signed_monero_tx
+ColdWallet -> HotWallet: cp /cold/signed_monero_tx /hot
 
-HotWallet -> MainChain: submit signed_monero_tx
+HotWallet -> monerod: use <--command submit_transfer> \n to send signed_monero_tx
 
 
 @enduml
