@@ -1,8 +1,6 @@
 package com.okcoin.vault.jni.xmr;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 class Cold extends WalletBase {
 
@@ -22,7 +20,7 @@ class Cold extends WalletBase {
         params.add("--spend_key");
         params.add(spendkey);
 
-        return xmrj.execute(params.toArray(), null, null);
+        return XmrNativeInvoke.execute(params.toArray(), null, null);
     }
 
     protected void setDaemonAddress(List<String> p) {
@@ -35,7 +33,7 @@ class Cold extends WalletBase {
         params = createColdWalletParams();
         params.add("import_outputs");
         params.add("dummy");
-        byte[][] res = xmrj.transcation(params.toArray(), Moneroj.XMR_TX_OUTPUTS, outputs,null, null);
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_TX_OUTPUTS, outputs,null, null);
         return res[res.length - 1];
     }
 
@@ -56,7 +54,7 @@ class Cold extends WalletBase {
             // 生成未加密的签名交易hex
             params.add("export");
         }
-        return xmrj.transcation(params.toArray(), Moneroj.XMR_UNSIGNED_TX, unsignedTx,null, null);
+        return XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_UNSIGNED_TX, unsignedTx,null, null);
     }
 
 }

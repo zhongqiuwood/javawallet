@@ -1,4 +1,4 @@
-package com.okcoin.vault.jni;
+package com.okcoin.vault.jni.zcash;
 
 public class CZcashOk {
 

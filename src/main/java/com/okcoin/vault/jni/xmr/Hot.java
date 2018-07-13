@@ -1,9 +1,7 @@
 package com.okcoin.vault.jni.xmr;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 class Hot extends WalletBase {
     protected String walletDataPath;
@@ -22,7 +20,7 @@ class Hot extends WalletBase {
         params.add(address);
         params.add("--generate-from-view-key");
         params.add(walletDataPath);
-        return xmrj.execute(params.toArray(), null, null);
+        return XmrNativeInvoke.execute(params.toArray(), null, null);
     }
 
     protected List<String> createHotWalletParams() {
@@ -43,7 +41,7 @@ class Hot extends WalletBase {
             params.add(offsetTxid);
         }
 
-        byte[][] res = xmrj.transcation(params.toArray(), null, null,null, null);
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
         return res[res.length - 1];
     }
 
@@ -56,7 +54,7 @@ class Hot extends WalletBase {
             params.add(offsetTxid);
         }
 
-        xmrj.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
+        XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
     }
 
     public byte[] produceUnsignedTx(String targetAddress, String priority, String amount) {
@@ -67,7 +65,7 @@ class Hot extends WalletBase {
         params.add(priority);
         params.add(targetAddress);
         params.add(amount);
-        byte[][] res = xmrj.transcation(params.toArray(), null, null,null, null);
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
         return res[res.length - 1];
     }
 
@@ -75,7 +73,7 @@ class Hot extends WalletBase {
 
         params = createHotWalletParams();
         params.add("submit_transfer");
-        byte[][] res = xmrj.transcation(params.toArray(), Moneroj.XMR_SIGNED_TX, signedTx,null, null);
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_SIGNED_TX, signedTx,null, null);
         return res;
     }
 

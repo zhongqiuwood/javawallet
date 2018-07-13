@@ -42,3 +42,28 @@ cd zcash/src
 make -f Makefile_src
 ls *.so
 ls *.dylib
+```
+
+### stellar
+```
+git clone --recursive https://github.com/okblockchainlab/stellar-core.git
+cd stellar-core/ok-wallet
+mkdir build
+cd build
+cmake ..
+make
+ls *.so
+ls *.dylib
+```
+
+### raiblocks
+```
+git clone --recursive https://github.com/okblockchainlab/raiblocks.git
+cd raiblocks/ok-wallet
+mkdir build
+cd build
+cmake -DACTIVE_NETWORK=rai_live_network ..   ## for testnet, run cmake -DACTIVE_NETWORK=rai_test_network ..
+make
+ls *.so
+ls *.dylib
+```
