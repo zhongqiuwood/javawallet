@@ -77,5 +77,12 @@ class Hot extends WalletBase {
         return res;
     }
 
+    public void balance() {
+
+        params = createHotWalletParams();
+        params.add("balance");
+        XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
+    }
+
 }
 

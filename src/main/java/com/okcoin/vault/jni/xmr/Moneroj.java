@@ -27,14 +27,14 @@ class Moneroj {
                 Util.dump("create hot wallet", result);
             }
 
+//            if (true) { return; }
             System.out.printf("========================================================================================\n");
             System.out.printf("============================== hot wallet exports outputs ===============================\n");
             System.out.printf("========================================================================================\n");
 
             // 发生在offsetTxid之前的tx不会被导出
             String offsetTxid;
-            offsetTxid = "dummy";
-//            offsetTxid = "1d3586a1415186ee25b5cb37d587b0e339ce1cab73f51dc76dc134b5b1ee1137";
+            offsetTxid = "61b0439644ac86eac365437d222088818b640470af8c7b2f2234a6ae1fbf6b32";
             byte[] outputs = h.exportOutputs(offsetTxid);
             System.out.printf("outputs returned. size<%d>\n", outputs.length);
 
@@ -61,7 +61,7 @@ class Moneroj {
             System.out.printf("============================== produceUnsignedTx =======================================\n");
             System.out.printf("========================================================================================\n");
 
-            byte[] unsignedTx = h.produceUnsignedTx(Moneroj.TARGET_ADDRESS, "priority", "0.0166");
+            byte[] unsignedTx = h.produceUnsignedTx(Moneroj.TARGET_ADDRESS, "unimportant", "0.02");
             System.out.printf("unsigned_monero_tx returned. size<%d>\n", unsignedTx.length);
 
             if (unsignedTx.length == 0) {
@@ -139,7 +139,7 @@ class Moneroj {
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load("/Users/oak/go/src/github.com/okblockchainlab/monero/build/debug/src/wallet/libwallet.dylib");
+        System.load("/Users/oak/go/src/github.com/okblockchainlab/monero/build/dynamic_on/src/simplewallet_so/libmonerod.dylib");
     }
 
 //./monero-wallet-cli -h
