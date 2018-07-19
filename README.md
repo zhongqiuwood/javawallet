@@ -55,3 +55,16 @@ make
 ls *.so
 ls *.dylib
 ```
+
+### raiblocks
+```shell
+git clone --recursive https://github.com/okblockchainlab/raiblocks.git
+cd raiblocks/ok-wallet
+mkdir build
+cd build
+## for testnet, set ACTIVE_NETWORK=rai_test_network; for release version, set CMAKE_BUILD_TYPE=Release; the default BOOST_ROOT is /usr/local/boost if you don't set BOOST_ROOT variable.
+cmake -DACTIVE_NETWORK=rai_live_network -DCMAKE_BUILD_TYPE=Debug -DBOOST_ROOT=[boost_root] ..
+make
+ls *.so
+ls *.dylib
+```
