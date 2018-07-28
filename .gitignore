@@ -130,3 +130,4 @@ cmake-build-debug/
 cold
 cold.keys
 op
+*.class
