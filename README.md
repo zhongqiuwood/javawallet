@@ -76,3 +76,13 @@ export COIN_DEPS=`pwd`/depslib
 ls *.so
 ls *.dylib
 ```
+
+### zen
+```shell
+git clone https://github.com/okblockchainlab/zen.git
+cd zen
+./build.sh #only run this script if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
+```
