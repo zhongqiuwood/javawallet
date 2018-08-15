@@ -86,3 +86,14 @@ cd zen
 ls *.so
 ls *.dylib
 ```
+
+### Sia
+```shell
+export GOPATH=$GOPATH:/your/go/path/directory  #设置GOPATH路径
+cd /your/go/path/directory
+git clone https://github.com/okblockchainlab/Sia.git ./gitlab.com/NebulousLabs/Sia
+cd ./gitlab.com/NebulousLabs/Sia
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+./runtest.sh
+```
