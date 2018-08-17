@@ -35,10 +35,24 @@ cd qtum
 ls src/*.so
 ls src/*.dylib
 ```
-### zcash
+### zcash_centos
 ```
 git clone https://github.com/okblockchainlab/zcash
-cd zcash/src
+cd zcash/zcutil
+./build_ok_centos.sh
+cd ../zcash/src
+make -f Makefile_src_centos
+ls *.so
+ls *.dylib
+```
+
+### zcash_mac
+```
+git clone https://github.com/okblockchainlab/zcash
+cd zcash/zcutil
+#手动修改代码 configure.ac  l498 -pie->-W1,-pie
+./build.sh
+cd ../zcash/src
 make -f Makefile_src
 ls *.so
 ls *.dylib
