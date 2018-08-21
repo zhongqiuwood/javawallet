@@ -103,10 +103,21 @@ ls *.dylib
 
 ### Sia
 ```shell
-export GOPATH=$GOPATH:/your/go/path/directory  #设置GOPATH路径
-cd /your/go/path/directory
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
 git clone https://github.com/okblockchainlab/Sia.git ./gitlab.com/NebulousLabs/Sia
 cd ./gitlab.com/NebulousLabs/Sia
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+./runtest.sh
+```
+
+### dcrd
+```shell
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/dcrd.git ./github.com/decred/dcrd
+cd ./github.com/decred/dcrd
 ./build.sh #run this script only if you first time build the project
 ./runbuild.sh
 ./runtest.sh
