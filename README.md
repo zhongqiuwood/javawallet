@@ -109,7 +109,8 @@ git clone https://github.com/okblockchainlab/Sia.git ./gitlab.com/NebulousLabs/S
 cd ./gitlab.com/NebulousLabs/Sia
 ./build.sh #run this script only if you first time build the project
 ./runbuild.sh
-./runtest.sh
+ls *.so
+ls *.dylib
 ```
 
 ### dcrd
@@ -120,5 +121,6 @@ git clone https://github.com/okblockchainlab/dcrd.git ./github.com/decred/dcrd
 cd ./github.com/decred/dcrd
 ./build.sh #run this script only if you first time build the project
 ./runbuild.sh
-./runtest.sh
+ls *.so
+ls *.dylib
 ```
