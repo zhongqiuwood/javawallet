@@ -1,28 +1,26 @@
 package com.okcoin.vault.jni.xmr;
 
 import com.okcoin.vault.jni.common.Util;
-
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 class Moneroj implements Runnable {
 
     public static void main(String[] args) {
-
         try {
-
-            int concurrent = 10;
+            int concurrent = 6;
+            ExecutorService fixedThreadPool = Executors.newFixedThreadPool(concurrent);
             for (int i = 0; i < concurrent; ++i) {
-                Thread thread = new Thread(new Moneroj());
-                thread.start();
+                fixedThreadPool.execute(new Moneroj());
             }
 
-            while (true) {
-                System.out.printf("sleep\n");
-                Thread.sleep(1000);
-            }
-        } catch (InterruptedException e) {
+            fixedThreadPool.shutdown();
+//            while (true) {
+//                System.out.printf("sleep\n");
+//                Thread.sleep(1000);
+//            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
