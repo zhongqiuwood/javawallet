@@ -6,18 +6,36 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-class Moneroj {
+class Moneroj implements Runnable {
 
-    public static void main(String[] args)
+    public static void main(String[] args) {
+
+        try {
+
+            int concurrent = 10;
+            for (int i = 0; i < concurrent; ++i) {
+                Thread thread = new Thread(new Moneroj());
+                thread.start();
+            }
+
+            while (true) {
+                System.out.printf("sleep\n");
+                Thread.sleep(1000);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void run()
     {
-
         try {
             String[] result;
             Cold c = new Cold();
             Hot h  = new Hot();
 
             boolean createWallet = false;
-            createWallet = true;
+//            createWallet = true;
 
             if (createWallet) {
                 result = c.createWallet();
@@ -34,10 +52,10 @@ class Moneroj {
 
             // 发生在offsetTxid之前的tx不会被导出
             String offsetTxid;
-            offsetTxid = "61b0439644ac86eac365437d222088818b640470af8c7b2f2234a6ae1fbf6b32";
+            offsetTxid = "";
+//            offsetTxid = "61b0439644ac86eac365437d222088818b640470af8c7b2f2234a6ae1fbf6b32";
             byte[] outputs = h.exportOutputs(offsetTxid);
             System.out.printf("outputs returned. size<%d>\n", outputs.length);
-
 
             System.out.printf("========================================================================================\n");
             System.out.printf("====================== cold wallet exports KeyImages By Outputs =========================\n");
@@ -95,7 +113,7 @@ class Moneroj {
             }
 
             boolean submit = false;
-            submit = true;
+//            submit = true;
 
             if (submit) {
                 byte[][] submitResult = h.submitTransaction(signedTx);
@@ -111,7 +129,7 @@ class Moneroj {
             System.out.println(e.getMessage());
 
         } catch (Exception e) {
-
+            System.out.println("// catch Exception");
             System.out.println(e.getMessage());
         }
     }
@@ -135,11 +153,10 @@ class Moneroj {
         }
         return res;
     }
-
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load("/Users/oak/go/src/github.com/okblockchainlab/monero/build/dynamic_on/src/simplewallet_so/libmonerod.dylib");
+        System.load("/Users/oak/go/src/github.com/okblockchainlab/monero_static/build/dynamic_on/src/simplewallet_so/libmonerod.dylib");
     }
 
 //./monero-wallet-cli -h
@@ -229,19 +246,31 @@ class Moneroj {
 
 
     public static final String HOT_WALLET =
-            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/hot/hot";
+            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/yanhot/hot";
 
-    public static final String SPEND_KEY =
-            "2ecf6967f6697795647ac61bc5a5323f0c2c5f835e68d00072db1d85c1855305";
-
-    public static final String VIEW_KEY =
-            "b580aee166efde144eb1d1a174aad918d7486ead4677825408b741cb7200aa07";
-
-    public static final String ADDRESS =
-            "9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj";
 
     public static final String TARGET_ADDRESS =
             "A1puKBLCKkdgB8D2LkGzQPYU8mYjVohwEgoAqcLKjQ2PCgAci6T5wMsVHhXekcPP7sEYqkR4KBGddAbErMTJhd737f9oAAD";
+
+
+    public static final String SPEND_KEY =
+            "cac0eb97cddd955c7ef0a992c44077bbb875221845889afad1d4e761e045740e";
+
+    public static final String VIEW_KEY =
+            "512330f6544e50a3ad233f3b23a44eea2f7a78d16d20c2d4ed3d74eb07627806";
+
+    public static final String ADDRESS =
+            "9sXXpRtxYgh5yMYexKccr4dx35JM8rc1e8M7UDBfFCQmSgau1mQxTLk3j8MStt4CCnd8C99BGTw9uQ4DqhwtKq8r32pBpxe";
+
+
+//    public static final String SPEND_KEY =
+//            "2ecf6967f6697795647ac61bc5a5323f0c2c5f835e68d00072db1d85c1855305";
+//
+//    public static final String VIEW_KEY =
+//            "b580aee166efde144eb1d1a174aad918d7486ead4677825408b741cb7200aa07";
+//
+//    public static final String ADDRESS =
+//            "9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj";
 }
 
 //[wallet A2PZyj]: help

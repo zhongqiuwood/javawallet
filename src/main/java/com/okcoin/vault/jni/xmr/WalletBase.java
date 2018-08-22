@@ -23,12 +23,13 @@ class WalletBase {
         p.add("--do_not_interact");
         setDaemonAddress(p);
         p.add("--testnet");
+        p.add("--log-file");
+        p.add("/Users/oak/go/src/github.com/okblockchainlab/javawallet/xmr.json");
         p.add("--log-level");
-        p.add("4");
+        p.add("2");
         p.add("--password");
         p.add("1");
         return p;
     }
-
 }
 
