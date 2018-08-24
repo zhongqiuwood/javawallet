@@ -119,7 +119,6 @@ export GOPATH=/your/go/path/directory  #设置GOPATH路径
 cd $GOPATH/src
 git clone https://github.com/okblockchainlab/dcrd.git ./github.com/decred/dcrd
 cd ./github.com/decred/dcrd
-export COIN_DEPS=`pwd`/depslib
 ./build.sh #run this script only if you first time build the project
 ./runbuild.sh
 ls *.so
@@ -132,6 +131,7 @@ export GOPATH=/your/go/path/directory  #设置GOPATH路径
 cd $GOPATH/src
 git clone https://github.com/okblockchainlab/go-nebulas.git ./github.com/nebulasio/go-nebulas
 cd ./github.com/nebulasio/go-nebulas
+export COIN_DEPS=`pwd`/depslib
 ./build.sh #run this script only if you first time build the project
 ./runbuild.sh
 ls *.so
