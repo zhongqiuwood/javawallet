@@ -137,3 +137,15 @@ export COIN_DEPS=`pwd`/depslib
 ls *.so
 ls *.dylib
 ```
+
+### bytom
+```shell
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/bytom.git ./github.com/bytom
+cd ./github.com/bytom
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
+```
