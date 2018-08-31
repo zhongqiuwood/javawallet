@@ -14,7 +14,8 @@ class WalletBase {
 
     protected void setDaemonAddress(List<String> p) {
         p.add("--daemon-address");
-        p.add("localhost:28081");
+//        p.add("localhost:28081");
+        p.add("192.168.149.229:58081");
     }
 
     protected List<String> createParams() {
@@ -22,11 +23,11 @@ class WalletBase {
         p.add("--do-not-relay");
         p.add("--do_not_interact");
         setDaemonAddress(p);
-        p.add("--testnet");
+//        p.add("--testnet");
         p.add("--log-file");
         p.add("/Users/oak/go/src/github.com/okblockchainlab/javawallet/xmr.json");
         p.add("--log-level");
-        p.add("2");
+        p.add("1");
         p.add("--password");
         p.add("1");
         return p;

@@ -32,7 +32,17 @@ class Hot extends WalletBase {
         return p;
     }
 
-    public byte[] exportOutputs(String offsetTxid) throws UnsupportedEncodingException {
+    public byte[][] getBalance() throws UnsupportedEncodingException {
+        params = createHotWalletParams();
+        params.add("balance");
+        params.add("detail");
+
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
+
+        return res;
+    }
+
+    public byte[][] exportOutputs(String offsetTxid) throws UnsupportedEncodingException {
         params = createHotWalletParams();
         params.add("export_outputs");
         params.add("dummy");
@@ -42,7 +52,7 @@ class Hot extends WalletBase {
         }
 
         byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
-        return res[res.length - 1];
+        return res;
     }
 
     public void importKeyImages(byte[] keyImages, String offsetTxid) {
@@ -57,7 +67,7 @@ class Hot extends WalletBase {
         XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
     }
 
-    public byte[] produceUnsignedTx(String targetAddress, String priority, String amount) {
+    public byte[][] produceUnsignedTx(String targetAddress, String priority, String amount) {
 
         params = createHotWalletParams();
 
@@ -66,7 +76,7 @@ class Hot extends WalletBase {
         params.add(targetAddress);
         params.add(amount);
         byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
-        return res[res.length - 1];
+        return res;
     }
 
     public byte[][] submitTransaction(byte[] signedTx) {
