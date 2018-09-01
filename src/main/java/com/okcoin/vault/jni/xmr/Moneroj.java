@@ -2,6 +2,7 @@ package com.okcoin.vault.jni.xmr;
 
 import com.okcoin.vault.jni.common.Util;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -89,7 +90,7 @@ class Moneroj implements Runnable {
             System.out.printf("============================== produceUnsignedTx =======================================\n");
             System.out.printf("========================================================================================\n");
 
-            byte[][] unsignedTxRes = h.produceUnsignedTx(Moneroj.TARGET_ADDRESS, "unimportant", "0.02");
+            byte[][] unsignedTxRes = h.produceUnsignedTx(Moneroj.TARGET_ADDRESS, "unimportant", "0.0001");
             byte[] unsignedTx = getResultBySchema(XMR_UNSIGNED_TX, unsignedTxRes);
 
             System.out.printf("unsigned_monero_tx returned. size<%d>\n", unsignedTx.length);
@@ -202,9 +203,16 @@ class Moneroj implements Runnable {
         return res;
     }
 
+    public static final String HOT_WALLET_PATH =
+            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/mainnet/mainnet3";
+
+    public static final String DAEMON_URL = "127.0.0.1:18081";
+//    public static final String DAEMON_URL = "192.168.149.229:58081";
 
     ////////////////////////////////////////////
     // main net
+    public static final boolean ENABLE_TESTNET = false;
+
     public static final String SPEND_KEY =
             "f11d529fcf40303ad4f2791610f4f510d7613e33dbfb89cc59a4fea8173a670c";
 
@@ -218,88 +226,11 @@ class Moneroj implements Runnable {
             "48PjH3ksv1fiXniKvKvyH5UtFs5WhfS2Vf7U3TwzdRJtCc7HJWvCQe56dRahyhQyTAViXZ8Nzk4gQg6o4BJBMUoxNy8y8g7";
     ///////////////////////////////////////////
 
-
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
         System.load("/Users/oak/go/src/github.com/okchain/monero_static/build/dynamic_on/src/simplewallet_so/libmonerod.dylib");
     }
-
-//./monero-wallet-cli -h
-//    Wallet options:
-
-// 交易所可能需要用到的命令 ：
-//  --daemon-address arg                  Use daemon instance at <host>:<port>
-//  --daemon-host arg                     Use daemon instance at host <arg> instead of localhost
-//  --password arg                        Wallet password (escape/quote as needed)
-//  --daemon-port arg (=0)                Use daemon instance at port <arg> instead of 18081
-//  --daemon-login arg                    Specify username[:password] for daemon RPC client
-//  --testnet                             For testnet. Daemon must also belaunched with --testnet flag
-//  --wallet-file arg                     Use wallet <arg>
-//  --generate-from-view-key arg          Generate incoming-only wallet from view key
-//  --generate-from-spend-key arg         Generate deterministic wallet from spend key
-//  --unsigned_tx_hex arg                 Specify unsigned_tx_hex
-//  --spend_key arg                       Specify the Secret spend key to restore a wallet
-//  --view_key arg                        Specify the secret view key to restore a wallet
-//  --address arg                         Specify a wallet address in case of restoring the wallet from its secret view key
-//  --do_not_interact                     Disable interaction mode.
-//  --log-file arg                        Specify log file
-//  --log-level arg                       0-4 or categories
-//  --max-log-file-size arg (=104850000)  Specify maximum log file size [B]
-//  --command arg
-
-
-//  交易所可能暂时不需要用的命令 ：
-//  --stagenet                            For stagenet. Daemon must also be launched with --stagenet flag
-//  --restricted-rpc                      Restricts to view-only commands
-//  --shared-ringdb-dir                   arg (=/Users/zhongqiu/.shared-ringdb, /Users/zhongqiu/.shared-ringdb/testnet if 'testnet') Set shared ring database path
-//  --generate-new-wallet arg             Generate new wallet and save it to <arg>
-//  --generate-from-device arg            Generate new wallet from device and save it to <arg>
-//  --password-file arg                   Wallet password file
-//  --generate-from-keys arg              Generate wallet from private keys
-//  --generate-from-multisig-keys arg     Generate a master wallet from multisig wallet keys
-//  --generate-from-json arg              Generate wallet from JSON format file
-//  --mnemonic-language arg               Language for mnemonic
-//  --restore-deterministic-wallet        Recover wallet using Electrum-style mnemonic seed
-//  --restore-multisig-wallet             Recover multisig wallet using Electrum-style mnemonic seed
-//  --non-deterministic                   Generate non-deterministic view and spend keys
-//  --electrum-seed arg                   Specify Electrum seed for wallet recovery/creation
-//  --trusted-daemon                      Enable commands which rely on a trusted daemon
-//  --max-concurrency arg (=1)            Max number of threads to use for a parallel job
-//  --config-file arg                     Config file
-//  --allow-mismatched-daemon-version     Allow communicating with a daemon that uses a different RPC version
-//  --restore-height arg (=0)             Restore from specific blockchain height
-//  --do-not-relay                        The newly created transaction will not be relayed to the monero network
-//  --create-address-file                 Create an address file for new wallets
-//  --subaddress-lookahead arg            Set subaddress lookahead sizes to <major>:<minor>
-//  --use-english-language-names          Display English language names
-
-
-    // -----------------------------------------------------------
-    // testnet 测试账户，里面有16个币
-    // -----------------------------------------------------------
-    //    address: 9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj
-    //    seed: agile enhanced pierce motherly adept obliged bubble himself lexicon azure border haunted tawny leech zebra turnip anchor annoyed long dude ruined talent owls petals talent
-    //    spendkey:
-    //    secret: 2ecf6967f6697795647ac61bc5a5323f0c2c5f835e68d00072db1d85c1855305
-    //    public: 3347032ee408358d13a5f77faf468512386a2a08ef78214d017db0aeca5252d1
-    //    viewkey:
-    //    secret: b580aee166efde144eb1d1a174aad918d7486ead4677825408b741cb7200aa07
-    //    public: 10a91384eeb279eeb553547bf1caf3d62abee81ab4089e3491f685bf0a391287
-
-    // -----------------------------------------------------------
-    // testnet 测试账户B，收币用
-    // -----------------------------------------------------------
-    //    Address: A1puKBLCKkdgB8D2LkGzQPYU8mYjVohwEgoAqcLKjQ2PCgAci6T5wMsVHhXekcPP7sEYqkR4KBGddAbErMTJhd737f9oAAD
-    //    seed: sack ledge olympics coal cake mixture topic cavernous ahead hairy dusted macro germs aquarium friendly beware unnoticed unfit fountain either foes fidget silk syringe macro
-    //
-    //    spendkey
-    //    secret: fd4f1b209f2c1d6657d856e27055fd4a03619140c2ff19ff08eee70fff43500d
-    //    public: e482901a5c4c12ea3599381a9cf278bc2243759c38d7d9edecc69ee04e22dc45
-    //    viewkey
-    //    secret: b0012956e57c6261bd8b91daa8c8c8b605aee403f8c1ef436728c3e060e8d40d
-    //    public: cd48c6fc2e0d72a91f5324836e8766510107a51708e278395638b2e5baa57e3b
-
 
     public static final String XMR_VIEW_KEY    = "SecretViewKey";
     public static final String XMR_ADDRESS     = "ColdWalletAddress";
@@ -309,13 +240,9 @@ class Moneroj implements Runnable {
     public static final String XMR_TX_OUTPUTS  = "TxOutputs";
     public static final String XMR_TX_ID       = "TxId";
     public static final String XMR_ERROR       = "Error";
-
     public static final String XMR_BALANCE                = "Balance";
     public static final String XMR_UNLOCKED_BALANCE       = "UnlockedBalance";
 
-
-    public static final String HOT_WALLET =
-            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/yanhot/hot";
 
 
     /////////////////////////////////////////////////////////////////////////////
@@ -426,3 +353,79 @@ class Moneroj implements Runnable {
 //          version
 //          viewkey
 //          wallet_info
+
+//./monero-wallet-cli -h
+//    Wallet options:
+
+// 交易所可能需要用到的命令 ：
+//  --daemon-address arg                  Use daemon instance at <host>:<port>
+//  --daemon-host arg                     Use daemon instance at host <arg> instead of localhost
+//  --password arg                        Wallet password (escape/quote as needed)
+//  --daemon-port arg (=0)                Use daemon instance at port <arg> instead of 18081
+//  --daemon-login arg                    Specify username[:password] for daemon RPC client
+//  --testnet                             For testnet. Daemon must also belaunched with --testnet flag
+//  --wallet-file arg                     Use wallet <arg>
+//  --generate-from-view-key arg          Generate incoming-only wallet from view key
+//  --generate-from-spend-key arg         Generate deterministic wallet from spend key
+//  --unsigned_tx_hex arg                 Specify unsigned_tx_hex
+//  --spend_key arg                       Specify the Secret spend key to restore a wallet
+//  --view_key arg                        Specify the secret view key to restore a wallet
+//  --address arg                         Specify a wallet address in case of restoring the wallet from its secret view key
+//  --do_not_interact                     Disable interaction mode.
+//  --log-file arg                        Specify log file
+//  --log-level arg                       0-4 or categories
+//  --max-log-file-size arg (=104850000)  Specify maximum log file size [B]
+//  --command arg
+
+
+//  交易所可能暂时不需要用的命令 ：
+//  --stagenet                            For stagenet. Daemon must also be launched with --stagenet flag
+//  --restricted-rpc                      Restricts to view-only commands
+//  --shared-ringdb-dir                   arg (=/Users/zhongqiu/.shared-ringdb, /Users/zhongqiu/.shared-ringdb/testnet if 'testnet') Set shared ring database path
+//  --generate-new-wallet arg             Generate new wallet and save it to <arg>
+//  --generate-from-device arg            Generate new wallet from device and save it to <arg>
+//  --password-file arg                   Wallet password file
+//  --generate-from-keys arg              Generate wallet from private keys
+//  --generate-from-multisig-keys arg     Generate a master wallet from multisig wallet keys
+//  --generate-from-json arg              Generate wallet from JSON format file
+//  --mnemonic-language arg               Language for mnemonic
+//  --restore-deterministic-wallet        Recover wallet using Electrum-style mnemonic seed
+//  --restore-multisig-wallet             Recover multisig wallet using Electrum-style mnemonic seed
+//  --non-deterministic                   Generate non-deterministic view and spend keys
+//  --electrum-seed arg                   Specify Electrum seed for wallet recovery/creation
+//  --trusted-daemon                      Enable commands which rely on a trusted daemon
+//  --max-concurrency arg (=1)            Max number of threads to use for a parallel job
+//  --config-file arg                     Config file
+//  --allow-mismatched-daemon-version     Allow communicating with a daemon that uses a different RPC version
+//  --restore-height arg (=0)             Restore from specific blockchain height
+//  --do-not-relay                        The newly created transaction will not be relayed to the monero network
+//  --create-address-file                 Create an address file for new wallets
+//  --subaddress-lookahead arg            Set subaddress lookahead sizes to <major>:<minor>
+//  --use-english-language-names          Display English language names
+
+
+// -----------------------------------------------------------
+// testnet 测试账户，里面有16个币
+// -----------------------------------------------------------
+//    address: 9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj
+//    seed: agile enhanced pierce motherly adept obliged bubble himself lexicon azure border haunted tawny leech zebra turnip anchor annoyed long dude ruined talent owls petals talent
+//    spendkey:
+//    secret: 2ecf6967f6697795647ac61bc5a5323f0c2c5f835e68d00072db1d85c1855305
+//    public: 3347032ee408358d13a5f77faf468512386a2a08ef78214d017db0aeca5252d1
+//    viewkey:
+//    secret: b580aee166efde144eb1d1a174aad918d7486ead4677825408b741cb7200aa07
+//    public: 10a91384eeb279eeb553547bf1caf3d62abee81ab4089e3491f685bf0a391287
+
+// -----------------------------------------------------------
+// testnet 测试账户B，收币用
+// -----------------------------------------------------------
+//    Address: A1puKBLCKkdgB8D2LkGzQPYU8mYjVohwEgoAqcLKjQ2PCgAci6T5wMsVHhXekcPP7sEYqkR4KBGddAbErMTJhd737f9oAAD
+//    seed: sack ledge olympics coal cake mixture topic cavernous ahead hairy dusted macro germs aquarium friendly beware unnoticed unfit fountain either foes fidget silk syringe macro
+//
+//    spendkey
+//    secret: fd4f1b209f2c1d6657d856e27055fd4a03619140c2ff19ff08eee70fff43500d
+//    public: e482901a5c4c12ea3599381a9cf278bc2243759c38d7d9edecc69ee04e22dc45
+//    viewkey
+//    secret: b0012956e57c6261bd8b91daa8c8c8b605aee403f8c1ef436728c3e060e8d40d
+//    public: cd48c6fc2e0d72a91f5324836e8766510107a51708e278395638b2e5baa57e3b
+

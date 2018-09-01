@@ -7,7 +7,7 @@ class Hot extends WalletBase {
     protected String walletDataPath;
 
     public Hot() {
-        walletDataPath = Moneroj.HOT_WALLET;
+        walletDataPath = Moneroj.HOT_WALLET_PATH;
     }
 
     public String[] createWallet() throws UnsupportedEncodingException {
