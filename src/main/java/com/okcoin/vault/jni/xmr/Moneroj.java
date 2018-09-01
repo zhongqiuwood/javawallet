@@ -9,27 +9,40 @@ import java.util.concurrent.Executors;
 class Moneroj implements Runnable {
 
     public static final String HOT_WALLET_PATH =
-            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/mainnet/mainnet3";
+            "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/testnet/test1";
 
-    public static final String DAEMON_URL = "127.0.0.1:18081";
+    public static final String DAEMON_URL = "127.0.0.1:28081";
 //    public static final String DAEMON_URL = "192.168.149.229:58081";
+
+    public static final boolean ENABLE_TESTNET = true;
 
     ////////////////////////////////////////////
     // main net
-    public static final boolean ENABLE_TESTNET = false;
+//    public static final String SPEND_KEY =
+//            "f11d529fcf40303ad4f2791610f4f510d7613e33dbfb89cc59a4fea8173a670c";
+//    public static final String VIEW_KEY =
+//            "232b946a299f307e1383a616cd3a721ab3ab159fc75b11253a75ad99a1617602";
+//    public static final String ADDRESS =
+//            "4AVJbZPdQFZ3umfGYATvt26mnTyGaCW8zP9MyJPBM77fbEPWSYj3wRMeztLVnBsNTHHeiqTnAxDRpKoF44ENxp5RHd31xqM";
+//    public static final String TARGET_ADDRESS =
+//            "48PjH3ksv1fiXniKvKvyH5UtFs5WhfS2Vf7U3TwzdRJtCc7HJWvCQe56dRahyhQyTAViXZ8Nzk4gQg6o4BJBMUoxNy8y8g7";
+    ///////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////
+    // test met
+    public static final String TARGET_ADDRESS =
+            "A1puKBLCKkdgB8D2LkGzQPYU8mYjVohwEgoAqcLKjQ2PCgAci6T5wMsVHhXekcPP7sEYqkR4KBGddAbErMTJhd737f9oAAD";
 
     public static final String SPEND_KEY =
-            "f11d529fcf40303ad4f2791610f4f510d7613e33dbfb89cc59a4fea8173a670c";
+            "cac0eb97cddd955c7ef0a992c44077bbb875221845889afad1d4e761e045740e";
 
     public static final String VIEW_KEY =
-            "232b946a299f307e1383a616cd3a721ab3ab159fc75b11253a75ad99a1617602";
+            "512330f6544e50a3ad233f3b23a44eea2f7a78d16d20c2d4ed3d74eb07627806";
 
     public static final String ADDRESS =
-            "4AVJbZPdQFZ3umfGYATvt26mnTyGaCW8zP9MyJPBM77fbEPWSYj3wRMeztLVnBsNTHHeiqTnAxDRpKoF44ENxp5RHd31xqM";
+            "9sXXpRtxYgh5yMYexKccr4dx35JM8rc1e8M7UDBfFCQmSgau1mQxTLk3j8MStt4CCnd8C99BGTw9uQ4DqhwtKq8r32pBpxe";
 
-    public static final String TARGET_ADDRESS =
-            "48PjH3ksv1fiXniKvKvyH5UtFs5WhfS2Vf7U3TwzdRJtCc7HJWvCQe56dRahyhQyTAViXZ8Nzk4gQg6o4BJBMUoxNy8y8g7";
-    ///////////////////////////////////////////
+
 
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
@@ -71,7 +84,7 @@ class Moneroj implements Runnable {
             Hot h  = new Hot();
 
             boolean createWallet = false;
-            createWallet = true;
+//            createWallet = true;
             if (createWallet) {
                 result = c.createWallet();
                 Util.dump("create cold wallet", result);
@@ -173,7 +186,7 @@ class Moneroj implements Runnable {
             }
 
             boolean submit = false;
-//            submit = true;
+            submit = true;
 
             if (submit) {
                 byte[][] submitResult = h.submitTransaction(signedTx);
