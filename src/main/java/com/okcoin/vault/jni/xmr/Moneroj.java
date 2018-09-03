@@ -96,7 +96,7 @@ class Moneroj implements Runnable {
             byte[][] balanceList = h.getBalance();
             dumpResult("getBalance", balanceList, false);
 
-            if (true) { return; }
+//            if (true) { return; }
 
             boolean exports_outputs = true;
 
@@ -138,7 +138,8 @@ class Moneroj implements Runnable {
                  System.out.printf("============================== importKeyImages =========================================\n");
                  System.out.printf("========================================================================================\n");
 
-                 h.importKeyImages(keyImages, offsetTxid);
+                 byte[][] importResult = h.importKeyImages(keyImages, offsetTxid);
+                 dumpResult("importKeyImages", importResult, false);
              }
             System.out.printf("========================================================================================\n");
             System.out.printf("============================== produceUnsignedTx =======================================\n");
@@ -192,9 +193,8 @@ class Moneroj implements Runnable {
                 byte[][] submitResult = h.submitTransaction(signedTx);
                 System.out.printf("submitResult returned. size<%d>\n", submitResult.length);
 
-                for (byte[] res : submitResult) {
-                    System.out.printf("submitResult. <%s>\n", byteArray2String(res));
-                }
+                dumpResult("submitResult", submitResult, false);
+
             }
 
         } catch (UnsupportedEncodingException e) {

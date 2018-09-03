@@ -55,7 +55,7 @@ class Hot extends WalletBase {
         return res;
     }
 
-    public void importKeyImages(byte[] keyImages, String offsetTxid) {
+    public byte[][] importKeyImages(byte[] keyImages, String offsetTxid) {
         params = createHotWalletParams();
         params.add("import_key_images");
         params.add("dummy");
@@ -64,7 +64,7 @@ class Hot extends WalletBase {
             params.add(offsetTxid);
         }
 
-        XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
+        return XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
     }
 
     public byte[][] produceUnsignedTx(String targetAddress, String priority, String amount) {
@@ -87,12 +87,6 @@ class Hot extends WalletBase {
         return res;
     }
 
-    public void balance() {
-
-        params = createHotWalletParams();
-        params.add("balance");
-        XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
-    }
 
 }
 
