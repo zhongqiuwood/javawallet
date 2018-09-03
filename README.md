@@ -149,3 +149,16 @@ cd ./github.com/bytom
 ls *.so
 ls *.dylib
 ```
+
+### starchain
+```shell
+yum install glide # setup glide, whick is a package management for golang.
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/starchain.git ./starchain
+cd ./starchain
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
+```
