@@ -3,7 +3,7 @@ package com.okcoin.vault.jni.zcash;
 public class CZcashOk {
 
     static {
-    	   System.load("/home/zcash/src/zcash-cli-ok.so"); 
+    	   System.load("/home/zcash/src/zcash-cli-ok.so");
     }
 
     static public native String[] execute(String networkType, String command);
@@ -18,7 +18,20 @@ public class CZcashOk {
         System.out.printf("//end -------------------------------------------------------\n");
         
     }
-    
+ 
+    public static void main(String[] args) {
+    	
+    	String networkType = "main"; // or testnet
+    	try {
+    		String function = "getnewaddress ";
+    		String[] createResults = CZcashOk.execute(networkType, function);
+            CZcashOk.dump("getnewaddress", createResults);
+            
+    	 } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+    	
+    }
     public static void main11(String[] args)
     {
         try {
@@ -46,7 +59,7 @@ public class CZcashOk {
             }
     }
 
-    public static void main(String[] args)
+    public static void main_transaction(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
