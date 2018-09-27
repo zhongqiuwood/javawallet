@@ -7,7 +7,7 @@ class Hot extends WalletBase {
     protected String walletDataPath;
 
     public Hot() {
-        walletDataPath = Moneroj.HOT_WALLET;
+        walletDataPath = Moneroj.HOT_WALLET_PATH;
     }
 
     public String[] createWallet() throws UnsupportedEncodingException {
@@ -32,7 +32,17 @@ class Hot extends WalletBase {
         return p;
     }
 
-    public byte[] exportOutputs(String offsetTxid) throws UnsupportedEncodingException {
+    public byte[][] getBalance() throws UnsupportedEncodingException {
+        params = createHotWalletParams();
+        params.add("balance");
+        params.add("detail");
+
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
+
+        return res;
+    }
+
+    public byte[][] exportOutputs(String offsetTxid) throws UnsupportedEncodingException {
         params = createHotWalletParams();
         params.add("export_outputs");
         params.add("dummy");
@@ -42,10 +52,10 @@ class Hot extends WalletBase {
         }
 
         byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
-        return res[res.length - 1];
+        return res;
     }
 
-    public void importKeyImages(byte[] keyImages, String offsetTxid) {
+    public byte[][] importKeyImages(byte[] keyImages, String offsetTxid) {
         params = createHotWalletParams();
         params.add("import_key_images");
         params.add("dummy");
@@ -54,10 +64,10 @@ class Hot extends WalletBase {
             params.add(offsetTxid);
         }
 
-        XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
+        return XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
     }
 
-    public byte[] produceUnsignedTx(String targetAddress, String priority, String amount) {
+    public byte[][] produceUnsignedTx(String targetAddress, String priority, String amount) {
 
         params = createHotWalletParams();
 
@@ -66,7 +76,7 @@ class Hot extends WalletBase {
         params.add(targetAddress);
         params.add(amount);
         byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
-        return res[res.length - 1];
+        return res;
     }
 
     public byte[][] submitTransaction(byte[] signedTx) {
@@ -77,12 +87,6 @@ class Hot extends WalletBase {
         return res;
     }
 
-    public void balance() {
-
-        params = createHotWalletParams();
-        params.add("balance");
-        XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
-    }
 
 }
 

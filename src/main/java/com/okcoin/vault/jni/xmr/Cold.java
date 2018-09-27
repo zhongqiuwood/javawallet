@@ -29,12 +29,12 @@ class Cold extends WalletBase {
         p.add("nobody:nobody");
     }
 
-    public byte[] exportKeyImagesByOutputs(byte[] outputs) {
+    public byte[][] exportKeyImagesByOutputs(byte[] outputs) {
         params = createColdWalletParams();
         params.add("import_outputs");
         params.add("dummy");
         byte[][] res = XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_TX_OUTPUTS, outputs,null, null);
-        return res[res.length - 1];
+        return res;
     }
 
     public byte[][] signTransaction(byte[] unsignedTx) {

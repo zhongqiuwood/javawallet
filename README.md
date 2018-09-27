@@ -103,11 +103,62 @@ ls *.dylib
 
 ### Sia
 ```shell
-export GOPATH=$GOPATH:/your/go/path/directory  #设置GOPATH路径
-cd /your/go/path/directory
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
 git clone https://github.com/okblockchainlab/Sia.git ./gitlab.com/NebulousLabs/Sia
 cd ./gitlab.com/NebulousLabs/Sia
 ./build.sh #run this script only if you first time build the project
 ./runbuild.sh
-./runtest.sh
+ls *.so
+ls *.dylib
+```
+
+### dcrd
+```shell
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/dcrd.git ./github.com/decred/dcrd
+cd ./github.com/decred/dcrd
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
+```
+
+### nebulas
+```shell
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/go-nebulas.git ./github.com/nebulasio/go-nebulas
+cd ./github.com/nebulasio/go-nebulas
+export COIN_DEPS=`pwd`/depslib
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
+```
+
+### bytom
+```shell
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/bytom.git ./github.com/bytom
+cd ./github.com/bytom
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
+```
+
+### starchain
+```shell
+yum install glide # setup glide, whick is a package management for golang.
+export GOPATH=/your/go/path/directory  #设置GOPATH路径
+cd $GOPATH/src
+git clone https://github.com/okblockchainlab/starchain.git ./starchain
+cd ./starchain
+./build.sh #run this script only if you first time build the project
+./runbuild.sh
+ls *.so
+ls *.dylib
 ```
