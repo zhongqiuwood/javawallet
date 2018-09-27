@@ -18,7 +18,8 @@ public class CZcashOk {
         System.out.printf("//end -------------------------------------------------------\n");
         
     }
- 
+
+
     public static void main(String[] args) {
     	
     	String networkType = "main"; // or testnet
