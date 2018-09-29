@@ -23,22 +23,18 @@ public class CZcashOk {
     	
     	String networkType = "main"; // or testnet
     	try {
-            String createrawtransaction2 ="createrawtransaction "+
-                      "[{\"txid\":\"b4cc287e58f87cdae59417329f710f3ecd75a4ee1d2872b7248f50977c8493f3\"," +
-                      "\"vout\":1,\"scriptPubKey\":\"a914b10c9df5f7edf436c697f02f1efdba4cf399615187\"," +
-                      "\"redeemScript\":\"512103debedc17b3df2badbcdd86d5feb4562b86fe182e5998abd8bcd4f122c6155b1b21027e940bb73ab8732bfdf7f9216ecefca5b94d6df834e77e108f68e66f126044c052ae\"}] " +
-                      "{\"t3ahmeUm2LWXPUJPx9QMheGtqTEfdDdgr7p\":11}";
+            String createrawtransaction2 ="createmultisig 2 [\"t16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"t171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]\"";
 
 
             String[] createResults = CZcashOk.execute(networkType, createrawtransaction2);
-            CZcashOk.dump("createrawtransaction", createResults);
+            CZcashOk.dump("createmultisig", createResults);
             
     	 } catch (Exception e) {
              System.out.println(e.getMessage());
          }
     	
     }
-    public static void main11(String[] args)
+    public static void main111(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
