@@ -3,7 +3,7 @@ package com.okcoin.vault.jni.zcash;
 public class CZcashOk {
 
     static {
-    	   System.load("/Users/oker/git/zcash/src/zcash-cli-ok.so");
+    	   System.load("/home/zcash/src/zcash-cli-ok.so");
     }
 
     static public native String[] execute(String networkType, String command);
