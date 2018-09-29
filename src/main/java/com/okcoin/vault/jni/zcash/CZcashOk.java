@@ -19,7 +19,6 @@ public class CZcashOk {
         
     }
 
-
     public static void main(String[] args) {
     	
     	String networkType = "main"; // or testnet
