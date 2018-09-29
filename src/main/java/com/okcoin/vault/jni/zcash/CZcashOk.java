@@ -24,8 +24,6 @@ public class CZcashOk {
     	
     	String networkType = "main"; // or testnet
     	try {
-    		 String networkType = "main"; // or testnet
-
             String createrawtransaction2 ="createrawtransaction "+
                       "[{\"txid\":\"b4cc287e58f87cdae59417329f710f3ecd75a4ee1d2872b7248f50977c8493f3\"," +
                       "\"vout\":1,\"scriptPubKey\":\"a914b10c9df5f7edf436c697f02f1efdba4cf399615187\"," +
