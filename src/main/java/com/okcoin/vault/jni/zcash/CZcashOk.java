@@ -23,7 +23,7 @@ public class CZcashOk {
     	
     	String networkType = "main"; // or testnet
     	try {
-            String createrawtransaction2 ="createmultisig 2 [\"t16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"t171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]";
+            String createrawtransaction2 ="createmultisig 2 [\"03d29f0b96f332e50d6014cb91c334214ecb8caf2881a97e7d944bdf4e5fd6a39e\",\"03f97e079ccae21e1ee65d5ee64e5c27d7d6ce9a867cec75e9736ad5f258329e02\"]";
 
 
             String[] createResults = CZcashOk.execute(networkType, createrawtransaction2);
