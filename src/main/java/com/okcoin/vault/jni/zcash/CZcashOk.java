@@ -34,7 +34,7 @@ public class CZcashOk {
          }
     	
     }
-    public static void main(String[] args)
+    public static void main_onlineNet(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
@@ -61,10 +61,10 @@ public class CZcashOk {
             }
     }
 
-    public static void main_z(String[] args)
+    public static void main(String[] args)
     {
         try {
-            String networkType = "main"; // or testnet
+            String networkType = "testnet"; // or testnet
             
             //address
             //String getaddressbyprivatekey ="ok_getAddress ST15NyNF44nKEXYZMC9B9jLQFvAw5bJid5Uh32RGqSBD8Bdkwq6q";
