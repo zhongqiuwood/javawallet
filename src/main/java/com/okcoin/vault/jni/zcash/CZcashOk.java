@@ -19,7 +19,7 @@ public class CZcashOk {
         
     }
 
-    public static void main(String[] args) {
+    public static void main_mul(String[] args) {
     	
     	String networkType = "main"; // or testnet
     	try {
@@ -34,7 +34,7 @@ public class CZcashOk {
          }
     	
     }
-    public static void main111(String[] args)
+    public static void main(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
@@ -51,7 +51,7 @@ public class CZcashOk {
 
             String signrawtransaction = "signrawtransaction " +
                     "030000807082c40301f393847c97508f24b772281deea475cd3e0f719f321794e5da7cf8587e28ccb40100000000ffffffff0100ab90410000000017a914b10c9df5f7edf436c697f02f1efdba4cf399615187000000005550050000 " +
-                    "[{\"txid\":\"b4cc287e58f87cdae59417329f710f3ecd75a4ee1d2872b7248f50977c8493f3\",\"vout\":1,\"scriptPubKey\":\"a914b10c9df5f7edf436c697f02f1efdba4cf399615187\"" +
+                    "[{\"txid\":\"b4cc287e58f87cdae59417329f710f3ecd75a4ee1d2872b7248f50977c8493f3\",\"vout\":1,\"amount\":0.01,\"scriptPubKey\":\"a914b10c9df5f7edf436c697f02f1efdba4cf399615187\"" +
                     ",\"redeemScript\":\"512103debedc17b3df2badbcdd86d5feb4562b86fe182e5998abd8bcd4f122c6155b1b21027e940bb73ab8732bfdf7f9216ecefca5b94d6df834e77e108f68e66f126044c052ae\"}]" +
                     " [\"KzsXybp9jX64P5ekX1KUxRQ79Jht9uzW7LorgwE65i5rWACL6LQe\",\"Kyhdf5LuKTRx4ge69ybABsiUAWjVRK4XGxAKk2FQLp2HjGMy87Z4\"]";
             String[] signResults = CZcashOk.execute(networkType, signrawtransaction);
