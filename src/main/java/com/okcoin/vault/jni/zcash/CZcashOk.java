@@ -34,7 +34,7 @@ public class CZcashOk {
          }
     	
     }
-    public static void main_src(String[] args)
+    public static void main(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
@@ -61,7 +61,7 @@ public class CZcashOk {
             }
     }
 
-    public static void main(String[] args)
+    public static void main_z(String[] args)
     {
         try {
             String networkType = "main"; // or testnet
