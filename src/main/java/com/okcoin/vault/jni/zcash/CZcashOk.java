@@ -74,8 +74,7 @@ public class CZcashOk {
             //1, t_addr-->t_addr
             String createrawtransaction ="z_createrawtransaction_ok "+
           	      "[{\"txid\":\"7c904c90fead7524182612047f3b0fbab5cd7563e35644fb729fbd6e8d204eb0\"," +
-          	      "\"vout\":0,\"scriptPubKey\":\"76a914d570edd14a69032dcedae909a80d2462f77ea82088ac\"," +
-          	      "\"redeemScript\":\"512103debedc17b3df2badbcdd86d5feb4562b86fe182e5998abd8bcd4f122c6155b1b21027e940bb73ab8732bfdf7f9216ecefca5b94d6df834e77e108f68e66f126044c052ae\"}] " +
+          	      "\"vout\":0}] " +
           	      "[] [{\"address\":\"tmNRn8FJPQUeLsPyYGxFtk12hwXMPDzTQT3\",\"amount\":0.499}]";
 
             String[] createResults = CZcashOk.execute(networkType, createrawtransaction);
