@@ -83,7 +83,9 @@ public class CZcashOk {
                  
             String signrawtransaction = "z_signrawtransaction_ok " + createResults[1] +  " "+
                     //"030000807082c40301f393847c97508f24b772281deea475cd3e0f719f321794e5da7cf8587e28ccb40100000000ffffffff0100e1f5050000000017a914b10c9df5f7edf436c697f02f1efdba4cf39961518700000000fd4f0500000000191ba85b " +
-                    "[] [\"cNxNvo7sfD57y1yFwPXdxwXNRJ9nDVBggDuWVjc9GK1Pt1hvP7eq\"]";
+                    "[{\"txid\":\"7c904c90fead7524182612047f3b0fbab5cd7563e35644fb729fbd6e8d204eb0\",\"vout\":1,\"amount\":0.01,\"scriptPubKey\":\"a914b10c9df5f7edf436c697f02f1efdba4cf399615187\"" +
+                                        ",\"redeemScript\":\"512103debedc17b3df2badbcdd86d5feb4562b86fe182e5998abd8bcd4f122c6155b1b21027e940bb73ab8732bfdf7f9216ecefca5b94d6df834e77e108f68e66f126044c052ae\"}]" +
+                    " [\"cNxNvo7sfD57y1yFwPXdxwXNRJ9nDVBggDuWVjc9GK1Pt1hvP7eq\"]";
             String[] signResults = CZcashOk.execute(networkType, signrawtransaction);
             CZcashOk.dump("z_signrawtransaction_ok", signResults);
             
