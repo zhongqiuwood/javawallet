@@ -72,7 +72,7 @@ public class CZcashOk {
             //CZcashOk.dump("getaddressbyprivatekey", address);
             
             //1, t_addr-->t_addr
-           /* String createrawtransaction ="z_createrawtransaction_ok "+
+            String createrawtransaction ="z_createrawtransaction_ok "+
           	      "[{\"txid\":\"2b0dd02ccdc5606359046127a81c96b894c223a920f8c031a64c8714362f4d08\"," +
           	      "\"vout\":0}] " +
           	      "[] [{\"address\":\"tmC8tAXTJ52WRTxxXHAWxnxdSG3kkzwUTAN\",\"amount\":1}]";
@@ -94,7 +94,7 @@ public class CZcashOk {
      		      ;
      		   //String[] sendResults = CZcashOk.execute(networkType, sendRawaction);
      		   //CZcashOk.dump("sendrawtransaction", signResults);
-            */
+
             //2 , t_addr-->t_addr
             //          -->z_addr
             
