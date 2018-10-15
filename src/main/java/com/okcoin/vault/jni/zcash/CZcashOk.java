@@ -75,7 +75,7 @@ public class CZcashOk {
             String createrawtransaction ="z_createrawtransaction_ok "+
           	      "[{\"txid\":\"2b0dd02ccdc5606359046127a81c96b894c223a920f8c031a64c8714362f4d08\"," +
           	      "\"vout\":0}] " +
-          	      "[] [{\"address\":\"tm9jF2FiQFTbKbC5pwVmt7Mf6Du9AdhD3Xn\",\"amount\":1}]";
+          	      "[] [{\"address\":\"tm9jF2FiQFTbKbC5pwVmt7Mf6Du9AdhD3Xn\",\"amount\":1},{\"address\":\"tmBGPuejwwUFZyEksFPsQahLvri1MDvrKmu\",\"amount\":8.999999}]";
 
             String[] createResults = CZcashOk.execute(networkType, createrawtransaction);
             CZcashOk.dump("z_createrawtransaction_ok", createResults);
