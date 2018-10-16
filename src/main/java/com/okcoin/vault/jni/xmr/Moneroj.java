@@ -51,19 +51,19 @@ class Moneroj implements Runnable {
 
     public static void main(String[] args) {
 
-        WALLET_NAME = "a2pz";
         WALLET_NAME = "A1pu";
-        logLevel = "1";
-        amount = "4.7";
-        offsetTxid = "4002ad1a32590bfc55d1a15f2c199941644ef18a972a4788c57a2a17dfc3c334";
-//        preferredTxid = "24c84f6702f89c4b36e5af14c4ad0fa4b4a95da50fa428f38f7c512bf95a8bc4," +
-//                "8981c9ee27c330198b9c71ef04c7cd719545e66dcc51e41f4c2db43906bddf3b," +
-//                "877c5feaa2483504e00b84510e06fca5db23af5ce42a6ef3f12618c48647c3b1,";
+        logLevel = "4";
+        amount = "2";
+        offsetTxid = "188861c9d1f4d59a5930d3e8925117812230f2dc1753fbc15044b9cb7863c1e7";
+        preferredTxid = "26056ce408b4db6102dcd0ed420b6994dc1ce8fbd4dc4d5f2a88d525dd0bf0a2," +
+                "b15c11d7bd55f14d9dcfdfa911119535755200217d1a32356f8222e93f6d868b," +
+                "fb94d5431fb4ac3df2b73a22b6a965594bc5265f480c3c801a4264d013af4b79," +
+                "0e33f0b4303ecbbd0b85a23e86e2cf19f7aaa40f8e35ef51689df780f8aa176c";
 
-        createWallet = false;
+    createWallet = false;
 //        getBalance_only = true;
         exports_outputs = true;
-//        transfer = true;
+        transfer = true;
 //        sign = true;
         submit = false;
 
