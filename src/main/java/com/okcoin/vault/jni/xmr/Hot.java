@@ -67,11 +67,12 @@ class Hot extends WalletBase {
         return XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
     }
 
-    public byte[][] produceUnsignedTx(String targetAddress, String priority, String amount) {
+    public byte[][] produceUnsignedTx(String targetAddress, String priority, String amount, String preferred_txid) {
 
         params = createHotWalletParams();
 
         params.add("transfer");
+        params.add("preferred_txid=" + preferred_txid);
         params.add(priority);
         params.add(targetAddress);
         params.add(amount);

@@ -131,3 +131,6 @@ cold
 cold.keys
 op
 *.class
+mainnet
+testnet
+xmr.json
