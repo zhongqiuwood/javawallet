@@ -16,16 +16,16 @@ public class Stellarj {
     static String cmd = null;
 
     static {
-        System.load("/Users/oker/code/okbc/stellar-core/ok-wallet/build/libstellar-core.dylib");
+        System.load("/Users/oker/code/okbc/stellar-core/libstellar-core.dylib");
     }
 
     static public native String[] execute(String networkType, String command);
-
 
     public static void executeCommand(String networkType, String cmd, String context) {
 
         String[] results = Stellarj.execute(networkType, cmd);
         Util.dump(context, results);
+
     }
 
     public static void main(String[] args)
@@ -39,12 +39,16 @@ public class Stellarj {
             String from = testnet_address1;
             String to = testnet_address2;
             String count = "100";
-            cmd = "createrawtransaction " + from + " " + to + " " + count + " " + dataDir;
+            String fee = "100"; //fee can be an empty string for using default fee
+            //how to get sequence number of from account:
+            //https://www.stellar.org/developers/horizon/reference/endpoints/accounts-single.html
+            String seqNum = "121";
+            cmd = "createrawtransaction " + from + " " + to + " " + count + " " + seqNum + " " + fee;
             Stellarj.executeCommand(networkType, cmd, "createrawtransaction");
 
             String utx = "000000004F548C8ECD342CE3F007814274CEC9773270372CD3563E92EEAFE99953467FD300000064008F3CF0000000030000000000000000000000010000000000000001000000003926B0B8C4FFFADFED7D2F318EADBF8A80174846489238AA0E754E99F7D3A9E70000000000000000000000640000000000000000";
             String seed = testnet_seed1;
-            cmd = "signrawtransaction " + utx + " " + seed + " " + dataDir;
+            cmd = "signrawtransaction " + utx + " " + seed;
             Stellarj.executeCommand(networkType, cmd, "signrawtransaction");
         } catch (Exception e) {
 
