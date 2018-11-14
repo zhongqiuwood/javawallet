@@ -42,27 +42,24 @@ class Hot extends WalletBase {
         return res;
     }
 
-    public byte[][] exportOutputs(String offsetTxid) throws UnsupportedEncodingException {
+    public byte[][] exportOutputs(String offsetTxid, String begin_txindex, String end_txindex) throws UnsupportedEncodingException {
         params = createHotWalletParams();
         params.add("export_outputs");
         params.add("dummy");
-
-        if (offsetTxid != null && offsetTxid.length() > 0) {
-            params.add(offsetTxid);
-        }
+        params.add("offset_txid=" + offsetTxid);
+        params.add("begin_txindex=" + begin_txindex);
+        params.add("end_txindex=" + end_txindex);
 
         byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
         return res;
     }
 
-    public byte[][] importKeyImages(byte[] keyImages, String offsetTxid) {
+    public byte[][] importKeyImages(byte[] keyImages, String offsetTxid, String begin_txindex) {
         params = createHotWalletParams();
         params.add("import_key_images");
         params.add("dummy");
-
-        if (offsetTxid != null && offsetTxid.length() > 0) {
-            params.add(offsetTxid);
-        }
+        params.add("offset_txid=" + offsetTxid);
+        params.add("begin_txindex=" + begin_txindex);
 
         return XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_KEY_IMAGES, keyImages,null, null);
     }

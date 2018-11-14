@@ -2,10 +2,8 @@ package com.okcoin.vault.jni.xmr;
 
 import com.okcoin.vault.jni.common.Util;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-//import com.okcoin.vault.jni.xmr;
 
 class Moneroj implements Runnable {
 
@@ -35,37 +33,60 @@ class Moneroj implements Runnable {
     public static final String XMR_ERROR       = "Error";
     public static final String XMR_BALANCE                = "Balance";
     public static final String XMR_UNLOCKED_BALANCE       = "UnlockedBalance";
+    public static final String XMR_MAX_TXID               = "MaxTxid";
 
+
+    public static boolean importKeyImages = true;
+    public static boolean exportKeyImagesByOutputs = true;
     public static boolean createWallet = true;
     public static boolean getBalance_only = false;
-    public static boolean exports_outputs = false;
+    public static boolean export_outputs = false;
     public static boolean transfer = false;
     public static boolean sign = false;
     public static boolean submit = true;
+
+
+    public static String begin_txindex = "";
+    public static String end_txindex = "";
+
     public static String amount = "0.1";
     public static String logLevel = "4";
     public static String offsetTxid = "";
     public static String preferredTxid = "";
     public static String WALLET_NAME = "9sxx";
-    public static String TRANSFER_FEE = "unimportant"; //"default", "unimportant", "normal", "elevated", "priority"
+    public static String TRANSFER_FEE = "unimportant"; //one of: "default", "unimportant", "normal", "elevated", "priority"
 
     public static void main(String[] args) {
 
-        WALLET_NAME = "A1pu";
-        logLevel = "4";
-        amount = "2";
-        offsetTxid = "188861c9d1f4d59a5930d3e8925117812230f2dc1753fbc15044b9cb7863c1e7";
-        preferredTxid = "26056ce408b4db6102dcd0ed420b6994dc1ce8fbd4dc4d5f2a88d525dd0bf0a2," +
-                "b15c11d7bd55f14d9dcfdfa911119535755200217d1a32356f8222e93f6d868b," +
-                "fb94d5431fb4ac3df2b73a22b6a965594bc5265f480c3c801a4264d013af4b79," +
-                "0e33f0b4303ecbbd0b85a23e86e2cf19f7aaa40f8e35ef51689df780f8aa176c";
+//        WALLET_NAME = "A1pu";
+//        WALLET_NAME = "A2PZ";
+        WALLET_NAME = "9sxx";
 
-    createWallet = false;
+        logLevel = "4";
+        amount = "3";
+
+        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
+//        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
+//        offsetTxid = "17d0be4d322142fcab59662886e315bca2f3e269c733da97e956e9894a45e630"; //169
+
+//        offsetTxid = "a3a68a1c370235f4e558d938586b025f3ed305cd35d6ebc3e566e39b13a701e6";
+//        offsetTxid = "188861c9d1f4d59a5930d3e8925117812230f2dc1753fbc15044b9cb7863c1e7";
+//        preferredTxid = "26056ce408b4db6102dcd0ed420b6994dc1ce8fbd4dc4d5f2a88d525dd0bf0a2," +
+//                "b15c11d7bd55f14d9dcfdfa911119535755200217d1a32356f8222e93f6d868b," +
+//                "fb94d5431fb4ac3df2b73a22b6a965594bc5265f480c3c801a4264d013af4b79," +
+//                "0e33f0b4303ecbbd0b85a23e86e2cf19f7aaa40f8e35ef51689df780f8aa176c";
+
+
+        createWallet = false;
 //        getBalance_only = true;
-        exports_outputs = true;
-        transfer = true;
+        export_outputs = true;
+//        exportKeyImagesByOutputs = false;
+//        importKeyImages = false;
+
+//        transfer = true;
 //        sign = true;
-        submit = false;
+//        submit = false;
+//        submit = true;
 
         try {
             WalletKey wkey = new WalletKey(WALLET_NAME);
@@ -88,6 +109,7 @@ class Moneroj implements Runnable {
     }
 
 
+
     public void run()
     {
         try {
@@ -106,43 +128,23 @@ class Moneroj implements Runnable {
                 return;
             }
 
-             if (exports_outputs) {
+            if (export_outputs) {
 
-                 System.out.printf("========================================================================================\n");
-                 System.out.printf("============================== hot wallet exports outputs ===============================\n");
-                 System.out.printf("========================================================================================\n");
+                offsetTxid="";
+                begin_txindex = "0";
+                end_txindex = "9";
+                exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
 
-                 byte[][] outputsResult = h.exportOutputs(offsetTxid);
-                 Util.dumpResult("exportOutputs", outputsResult, true);
+                offsetTxid="";
+                begin_txindex = "10";
+                end_txindex = "19";
+                exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
 
-                 byte[] outputs = Util.getResultBySchema(XMR_TX_OUTPUTS, outputsResult);
-                 System.out.printf("outputs returned. size<%d>\n", outputsResult.length);
-
-                 System.out.printf("========================================================================================\n");
-                 System.out.printf("====================== cold wallet exports KeyImages By Outputs =========================\n");
-                 System.out.printf("========================================================================================\n");
-
-                 byte[][] keyImagesResult = c.exportKeyImagesByOutputs(outputs);
-
-                 Util.dumpResult("exportKeyImagesByOutputs", keyImagesResult, true);
-
-                 byte[] keyImages = Util.getResultBySchema(XMR_KEY_IMAGES, keyImagesResult);
-
-                 System.out.printf("keyImages returned. size<%d>\n", keyImagesResult.length);
-
-                 if (keyImages.length == 0) {
-                     System.out.printf("Failed to export keyImages. size<%d>\n", keyImagesResult.length);
-                     return;
-                 }
-
-                 System.out.printf("========================================================================================\n");
-                 System.out.printf("============================== importKeyImages =========================================\n");
-                 System.out.printf("========================================================================================\n");
-
-                 byte[][] importResult = h.importKeyImages(keyImages, offsetTxid);
-                 Util.dumpResult("importKeyImages", importResult, false);
-
-             }
+                offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // index 171
+                begin_txindex = "";
+                end_txindex = "";
+                exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
+            }
 
             if (!transfer) {
                 return;
@@ -225,6 +227,59 @@ class Moneroj implements Runnable {
         }
     }
 
+    void exportAndImport(Cold c, Hot h, String offsetTxid, String beginTxindex, String endTxindex) {
+
+        try {
+
+            System.out.printf("========================================================================================\n");
+            System.out.printf("============================== hot wallet exports outputs ===============================\n");
+            System.out.printf("========================================================================================\n");
+
+            byte[][] outputsResult = h.exportOutputs(offsetTxid, beginTxindex, endTxindex);
+            Util.dumpResult("exportOutputs", outputsResult, true);
+
+            byte[] outputs = Util.getResultBySchema(XMR_TX_OUTPUTS, outputsResult);
+            System.out.printf("outputs returned. size<%d>\n", outputsResult.length);
+
+
+            byte[] keyImages = null;
+            if (exportKeyImagesByOutputs) {
+                System.out.printf("========================================================================================\n");
+                System.out.printf("====================== cold wallet exports KeyImages By Outputs =========================\n");
+                System.out.printf("========================================================================================\n");
+
+                byte[][] keyImagesResult = c.exportKeyImagesByOutputs(outputs);
+
+                Util.dumpResult("exportKeyImagesByOutputs", keyImagesResult, true);
+
+                keyImages = Util.getResultBySchema(XMR_KEY_IMAGES, keyImagesResult);
+
+                System.out.printf("keyImages returned. size<%d>\n", keyImagesResult.length);
+
+                if (keyImages.length == 0) {
+                    System.out.printf("Failed to export keyImages. size<%d>\n", keyImagesResult.length);
+                    return;
+                }
+            }
+
+            if (importKeyImages) {
+                System.out.printf("========================================================================================\n");
+                System.out.printf("============================== importKeyImages =========================================\n");
+                System.out.printf("========================================================================================\n");
+
+                byte[][] importResult = h.importKeyImages(keyImages, offsetTxid, beginTxindex);
+                Util.dumpResult("importKeyImages", importResult, false);
+            }
+        }catch (UnsupportedEncodingException e) {
+
+            System.out.println(e.getMessage());
+
+        } catch (Exception e) {
+            System.out.println("// catch Exception");
+            System.out.println(e.getMessage());
+        }
+
+    }
 }
 
 //[wallet A2PZyj]: help

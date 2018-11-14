@@ -30,10 +30,11 @@ public class WalletKey {
     public WalletKey(String name) {
         if (name.compareToIgnoreCase("A2PZ") == 0) {
 
-//            HOT_WALLET_PATH = HOT_WALLET_TOP + "/test_" + name;
-//            ADDRESS        = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
-//            VIEW_KEY       = "6e6749ca79e1dedcf514b7fe52035b8cb04c693afe456d36b91f56c08842260a";
-//            TARGET_ADDRESS = "9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj";
+            HOT_WALLET_PATH = HOT_WALLET_TOP + "/test_" + name;
+            ADDRESS        = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
+            VIEW_KEY       = "6e6749ca79e1dedcf514b7fe52035b8cb04c693afe456d36b91f56c08842260a";
+            TARGET_ADDRESS = "9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj";
+            SPEND_KEY      = "d7a66a48134551b44739f372ae42c2ce9675cb86286e5c69d07e47d90ff3b308";
 
         } else if (name.compareToIgnoreCase("9sXX") == 0) {
 
