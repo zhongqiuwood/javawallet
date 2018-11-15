@@ -33,7 +33,7 @@ class Moneroj implements Runnable {
     public static final String XMR_ERROR       = "Error";
     public static final String XMR_BALANCE                = "Balance";
     public static final String XMR_UNLOCKED_BALANCE       = "UnlockedBalance";
-    public static final String XMR_MAX_TXID               = "MaxTxid";
+    public static final String XMR_MAX_TXINDEX            = "MaxTxIndex";
 
 
     public static boolean importKeyImages = true;
@@ -63,7 +63,7 @@ class Moneroj implements Runnable {
         WALLET_NAME = "9sxx";
 
         logLevel = "4";
-        amount = "3";
+        amount = "1";
 
         offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
 //        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
@@ -85,7 +85,6 @@ class Moneroj implements Runnable {
 
 //        transfer = true;
 //        sign = true;
-//        submit = false;
 //        submit = true;
 
         try {
@@ -122,9 +121,10 @@ class Moneroj implements Runnable {
                 Util.dump("create hot wallet", result);
             }
 
+            byte[][] balanceList = h.getBalance();
+            Util.dumpResult("getBalance", balanceList, false);
+
             if (getBalance_only) {
-                byte[][] balanceList = h.getBalance();
-                Util.dumpResult("getBalance", balanceList, false);
                 return;
             }
 
@@ -144,6 +144,9 @@ class Moneroj implements Runnable {
                 begin_txindex = "";
                 end_txindex = "";
                 exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
+
+                balanceList = h.getBalance();
+                Util.dumpResult("getBalance", balanceList, false);
             }
 
             if (!transfer) {
