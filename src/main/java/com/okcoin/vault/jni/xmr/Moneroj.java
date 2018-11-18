@@ -38,7 +38,6 @@ class Moneroj implements Runnable {
 
     public static boolean importKeyImages = true;
     public static boolean exportKeyImagesByOutputs = true;
-    public static boolean createWallet = true;
     public static boolean getBalance_only = false;
     public static boolean export_outputs = false;
     public static boolean transfer = false;
@@ -48,11 +47,11 @@ class Moneroj implements Runnable {
 
     public static String begin_txindex = "";
     public static String end_txindex = "";
+    public static String preferredTxid = "";
 
     public static String amount = "0.1";
     public static String logLevel = "4";
     public static String offsetTxid = "";
-    public static String preferredTxid = "";
     public static String WALLET_NAME = "9sxx";
     public static String TRANSFER_FEE = "unimportant"; //one of: "default", "unimportant", "normal", "elevated", "priority"
 
@@ -61,31 +60,39 @@ class Moneroj implements Runnable {
 //        WALLET_NAME = "A1pu";
 //        WALLET_NAME = "A2PZ";
         WALLET_NAME = "9sxx";
+        WALLET_NAME = "9u7m";
 
         logLevel = "4";
         amount = "1";
 
-        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
+//        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
 //        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
 //        offsetTxid = "17d0be4d322142fcab59662886e315bca2f3e269c733da97e956e9894a45e630"; //169
 
 //        offsetTxid = "a3a68a1c370235f4e558d938586b025f3ed305cd35d6ebc3e566e39b13a701e6";
 //        offsetTxid = "188861c9d1f4d59a5930d3e8925117812230f2dc1753fbc15044b9cb7863c1e7";
-//        preferredTxid = "26056ce408b4db6102dcd0ed420b6994dc1ce8fbd4dc4d5f2a88d525dd0bf0a2," +
+//        preferredTxid = "17d0be4d322142fcab59662886e315bca2f3e269c733da97e956e9894a45e630"; // 177
 //                "b15c11d7bd55f14d9dcfdfa911119535755200217d1a32356f8222e93f6d868b," +
 //                "fb94d5431fb4ac3df2b73a22b6a965594bc5265f480c3c801a4264d013af4b79," +
 //                "0e33f0b4303ecbbd0b85a23e86e2cf19f7aaa40f8e35ef51689df780f8aa176c";
 
+//        preferredTxid = "82b7205905684bda2ac987b3d48eab3e099a7bdac689ea6ba89785a2eabca948"
+//        +",260a952e438bedd944cdfc11c404bd88fbc233f6ed85d349483a0b4ba660c422"
+//                + ",9682b9e4faee18fbb53a86702dba57be61e6a8a752c44f465b80fb3f45afbcbd"
+//        +",3329fb7a14907c0916b5a177f11658a366740a7593d970ecee095929b8fcfe38"
+//        ;
 
-        createWallet = false;
+
+        begin_txindex = "192";
+        end_txindex = null;
 //        getBalance_only = true;
         export_outputs = true;
 //        exportKeyImagesByOutputs = false;
 //        importKeyImages = false;
 
-//        transfer = true;
-//        sign = true;
-//        submit = true;
+        transfer = true;
+        sign = true;
+        submit = true;
 
         try {
             WalletKey wkey = new WalletKey(WALLET_NAME);
@@ -116,8 +123,8 @@ class Moneroj implements Runnable {
             Cold c = new Cold();
             Hot h  = new Hot();
 
-            if (createWallet) {
-                result = h.createWallet();
+            result = h.createWallet();
+            if (result != null) {
                 Util.dump("create hot wallet", result);
             }
 
@@ -129,22 +136,7 @@ class Moneroj implements Runnable {
             }
 
             if (export_outputs) {
-
-                offsetTxid="";
-                begin_txindex = "0";
-                end_txindex = "9";
                 exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
-
-                offsetTxid="";
-                begin_txindex = "10";
-                end_txindex = "19";
-                exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
-
-                offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // index 171
-                begin_txindex = "";
-                end_txindex = "";
-                exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
-
                 balanceList = h.getBalance();
                 Util.dumpResult("getBalance", balanceList, false);
             }
@@ -259,7 +251,7 @@ class Moneroj implements Runnable {
 
                 System.out.printf("keyImages returned. size<%d>\n", keyImagesResult.length);
 
-                if (keyImages.length == 0) {
+                if (keyImages == null || keyImages.length == 0) {
                     System.out.printf("Failed to export keyImages. size<%d>\n", keyImagesResult.length);
                     return;
                 }

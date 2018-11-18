@@ -1,5 +1,6 @@
 package com.okcoin.vault.jni.xmr;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -10,7 +11,28 @@ class Hot extends WalletBase {
         walletDataPath = Moneroj.HOT_WALLET_PATH;
     }
 
+    Boolean walletExists() {
+        File addressFile = new File(walletDataPath + ".address.txt");
+        File keysFile = new File(walletDataPath + ".keys");
+        File dataFile = new File(walletDataPath);
+
+        if (!addressFile.exists()) {
+            return false;
+        }
+        if (!keysFile.exists()) {
+            return false;
+        }
+        if (!dataFile.exists()) {
+            return false;
+        }
+
+        return true;
+    }
+
     public String[] createWallet() throws UnsupportedEncodingException {
+        if (walletExists()) {
+            return null;
+        }
         params = createParams();
         params.add("--view_key");
         params.add(viewkey);
