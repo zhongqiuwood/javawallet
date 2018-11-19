@@ -1,10 +1,12 @@
 package com.okcoin.vault.jni.xmr;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-class WalletBase {
+abstract class WalletBase {
+    protected String walletDataPath;
 
     protected List<String> params = new ArrayList<String>();
 
@@ -19,6 +21,23 @@ class WalletBase {
         p.add(daemonUrl);
     }
 
+    Boolean walletExists() {
+        File addressFile = new File(walletDataPath + ".address.txt");
+        File keysFile = new File(walletDataPath + ".keys");
+        File dataFile = new File(walletDataPath);
+
+        if (!addressFile.exists()) {
+            return false;
+        }
+        if (!keysFile.exists()) {
+            return false;
+        }
+        if (!dataFile.exists()) {
+            return false;
+        }
+
+        return true;
+    }
 
     protected List<String> createParams() {
         List<String> p = new ArrayList<String>();
@@ -34,12 +53,16 @@ class WalletBase {
             p.add("--testnet");
         }
         p.add("--log-file");
-        p.add("/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/testnet/_xmr.json");
+
+        p.add(WalletKey.XMR_LOG);
         p.add("--log-level");
         p.add(Moneroj.logLevel);
         p.add("--password");
         p.add("1");
         return p;
     }
+
+    public abstract byte[][] getBalance();
+
 }
 

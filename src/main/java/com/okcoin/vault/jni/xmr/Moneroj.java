@@ -11,16 +11,20 @@ class Moneroj implements Runnable {
 //    public static final String DAEMON_URL = "192.168.149.229:58081";
 
     public static final boolean ENABLE_TESTNET = true;
-    public static String HOT_WALLET_PATH;
+//    public static boolean STORE_KEYS = false;
     public static String ADDRESS;
     public static String SPEND_KEY;
     public static String VIEW_KEY;
     public static String TARGET_ADDRESS;
 
+
+    public static String WALLET_SO_PATH = "/Users/oak/go/src/github.com/okchain/monero_static" + WalletKey.XMR_VERSION +
+    "/build/dynamic_on/src/simplewallet_so/libmonerod.dylib";
+
     static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load("/Users/oak/go/src/github.com/okchain/monero_static/build/dynamic_on/src/simplewallet_so/libmonerod.dylib");
+        System.load(WALLET_SO_PATH);
     }
 
     public static final String XMR_VIEW_KEY    = "SecretViewKey";
@@ -42,7 +46,7 @@ class Moneroj implements Runnable {
     public static boolean export_outputs = false;
     public static boolean transfer = false;
     public static boolean sign = false;
-    public static boolean submit = true;
+    public static boolean submit = false;
 
 
     public static String begin_txindex = "";
@@ -83,21 +87,21 @@ class Moneroj implements Runnable {
 //        ;
 
 
-        begin_txindex = "192";
+//        STORE_KEYS = false;
+        begin_txindex = "193";
         end_txindex = null;
 //        getBalance_only = true;
         export_outputs = true;
 //        exportKeyImagesByOutputs = false;
 //        importKeyImages = false;
 
-        transfer = true;
-        sign = true;
-        submit = true;
+//        transfer = true;
+//        sign = true;
+//        submit = true;
 
         try {
             WalletKey wkey = new WalletKey(WALLET_NAME);
             ADDRESS = wkey.getADDRESS();
-            HOT_WALLET_PATH = wkey.getHOT_WALLET_PATH();
             TARGET_ADDRESS = wkey.getTARGET_ADDRESS();
             SPEND_KEY = wkey.getSPEND_KEY();
             VIEW_KEY = wkey.getVIEW_KEY();
@@ -121,15 +125,27 @@ class Moneroj implements Runnable {
         try {
             String[] result;
             Cold c = new Cold();
-            Hot h  = new Hot();
 
+//            result = c.createWallet();
+//            if (result != null) {
+//                Util.dump("create Cold wallet", result);
+//            }
+//
+//            byte[][] balanceList2 = c.getBalance();
+//            Util.dumpResult("getBalance", balanceList2, false);
+//            if (true) {
+//                return;
+//            }
+
+
+            Hot h  = new Hot();
             result = h.createWallet();
             if (result != null) {
                 Util.dump("create hot wallet", result);
             }
 
-            byte[][] balanceList = h.getBalance();
-            Util.dumpResult("getBalance", balanceList, false);
+//            byte[][] balanceList = h.getBalance();
+//            Util.dumpResult("getBalance", balanceList, false);
 
             if (getBalance_only) {
                 return;
@@ -137,8 +153,8 @@ class Moneroj implements Runnable {
 
             if (export_outputs) {
                 exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
-                balanceList = h.getBalance();
-                Util.dumpResult("getBalance", balanceList, false);
+//                balanceList = h.getBalance();
+//                Util.dumpResult("getBalance", balanceList, false);
             }
 
             if (!transfer) {

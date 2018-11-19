@@ -1,11 +1,25 @@
 package com.okcoin.vault.jni.xmr;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 class Cold extends WalletBase {
 
+    public Cold() {
+        walletDataPath = WalletKey.getCOLD_WALLET_PATH();
+    }
+
     protected List<String> createColdWalletParams() {
         List<String> params = super.createParams();
+
+//        if (Moneroj.STORE_KEYS) {
+//            params.add("--wallet-file");
+//            params.add(walletDataPath);
+//        } else {
+//            params.add("--do_not_store_keys");
+//            params.add("--generate-from-spend-key");
+//            params.add(walletDataPath);
+//        }
 
         params.add("--spend_key");
         params.add(spendkey);
@@ -14,19 +28,42 @@ class Cold extends WalletBase {
         return params;
     }
 
-    public String[] createWallet() {
-
-        params = super.createParams();
-        params.add("--spend_key");
-        params.add(spendkey);
-
-        return XmrNativeInvoke.execute(params.toArray(), null, null);
-    }
+//    public String[] createWallet() {
+//
+//        if (walletExists()) {
+//            return null;
+//        }
+//
+//        params = super.createParams();
+//
+//        if (Moneroj.STORE_KEYS) {
+//            params.add("--do_not_store_keys");
+//            params.add("--start_height");
+//            params.add("0");
+//            params.add("--address");
+//            params.add(address);
+//            params.add("--generate-from-spend-key");
+//            params.add(walletDataPath);
+//        }
+//
+//        params.add("--spend_key");
+//        params.add(spendkey);
+//        return XmrNativeInvoke.execute(params.toArray(), null, null);
+//    }
 
     protected void setDaemonAddress(List<String> p) {
         // cold wallet connects nobody
-        p.add("--daemon-address");
-        p.add("nobody:nobody");
+//        p.add("--daemon-address");
+//        p.add("");
+    }
+
+    public byte[][] getBalance() {
+        params = createColdWalletParams();
+        params.add("balance");
+        params.add("detail");
+
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), null, null,null, null);
+        return res;
     }
 
     public byte[][] exportKeyImagesByOutputs(byte[] outputs) {

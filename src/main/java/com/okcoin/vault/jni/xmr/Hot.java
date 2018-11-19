@@ -5,29 +5,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 class Hot extends WalletBase {
-    protected String walletDataPath;
 
     public Hot() {
-        walletDataPath = Moneroj.HOT_WALLET_PATH;
+        walletDataPath = WalletKey.getHOT_WALLET_PATH();
     }
 
-    Boolean walletExists() {
-        File addressFile = new File(walletDataPath + ".address.txt");
-        File keysFile = new File(walletDataPath + ".keys");
-        File dataFile = new File(walletDataPath);
-
-        if (!addressFile.exists()) {
-            return false;
-        }
-        if (!keysFile.exists()) {
-            return false;
-        }
-        if (!dataFile.exists()) {
-            return false;
-        }
-
-        return true;
-    }
 
     public String[] createWallet() throws UnsupportedEncodingException {
         if (walletExists()) {
@@ -54,7 +36,7 @@ class Hot extends WalletBase {
         return p;
     }
 
-    public byte[][] getBalance() throws UnsupportedEncodingException {
+    public byte[][] getBalance()  {
         params = createHotWalletParams();
         params.add("balance");
         params.add("detail");
