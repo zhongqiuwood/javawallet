@@ -91,7 +91,8 @@ class Cold extends WalletBase {
             // 生成未加密的签名交易hex
             params.add("export");
         }
-        return XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_UNSIGNED_TX, unsignedTx,null, null);
+        byte[][] res = XmrNativeInvoke.transcation(params.toArray(), Moneroj.XMR_UNSIGNED_TX, unsignedTx,null, null);
+        return res;
     }
 
 }

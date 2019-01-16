@@ -3,6 +3,8 @@ package com.okcoin.vault.jni.common;
 import org.bitcoinj.core.Utils;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Util {
@@ -61,6 +63,20 @@ public class Util {
         }
 
         return null;
+    }
+
+    public static List<String> getResultListBySchema(String schema, byte[][] results) {
+        List resultList = new ArrayList();
+
+        for (int i = 0; i < results.length; i += 2) {
+
+            String resultSchema = Util.byteArray2String(results[i]);
+            if (resultSchema.compareToIgnoreCase(schema) == 0) {
+                resultList.add(Util.byteArray2String(results[i + 1]));
+            }
+        }
+
+        return resultList;
     }
 
     public static String byteArray2String(byte[] input) {

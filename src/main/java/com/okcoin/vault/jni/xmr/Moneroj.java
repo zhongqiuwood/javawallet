@@ -3,6 +3,7 @@ package com.okcoin.vault.jni.xmr;
 import com.okcoin.vault.jni.common.Util;
 import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Native;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -70,7 +71,7 @@ class Moneroj implements Runnable {
         logLevel = "4";
         amount = "0.1";
 
-        preferredTxid = "c8974e51412b35aaec5cad577a74b3844c1162d823687130151c74ad065cbb37";
+        preferredTxid = "ee883243b7ce6b4de465919c9c85b8431d10285ee5bf1712dfff785a8478aec1,3f62a2c3c1f1fd26255c506212c9da3d25e72edefdfa0765728e2f6336b08711";
 
 //        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
 //        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
@@ -95,10 +96,10 @@ class Moneroj implements Runnable {
         end_txindex = null;
 //        getBalance_only = true;
         export_outputs = true;
-        exportKeyImagesByOutputs = true;
-        importKeyImages = true;
+//        exportKeyImagesByOutputs = true;
+//        importKeyImages = true;
 
-//        transfer = true;
+        transfer = true;
 //        sign = true;
 //        submit = true;
 
@@ -184,6 +185,11 @@ class Moneroj implements Runnable {
                 return;
             }
 
+            List<String> inputTxidList = Util.getResultListBySchema(XMR_TX_ID, unsignedTxRes);
+
+            for (String inputTxid : inputTxidList) {
+                System.out.printf("input txid <%s>\n", inputTxid);
+            }
 
 //            boolean signAsync = true;
 //            signAsync = false;
