@@ -46,6 +46,11 @@ class Hot extends WalletBase {
         return res;
     }
 
+    // exportOutputs usage:
+    // #1: 仅指定 offset_txid, 导出的tx: [offset_txid, tail]
+    // #2: 仅指定 begin_txindex, 导出的tx: [begin_txindex, tail]
+    // #3: 仅指定 begin_txindex 和 end_txindex, 导出的tx: [begin_txindex, end_txindex]
+    // #4: offset_txid, begin_txindex 和 end_txindex都指定, begin_txindex 和 end_txindex会被忽略, 导出的tx: [offset_txid, tail]
     public byte[][] exportOutputs(String offsetTxid, String begin_txindex, String end_txindex) throws UnsupportedEncodingException {
         params = createHotWalletParams();
         params.add("export_outputs");
@@ -58,6 +63,10 @@ class Hot extends WalletBase {
         return res;
     }
 
+    // importKeyImages usage:
+    // #1: 仅指定 offset_txid, 导入的image: [offset_txid, offset_txid + len(keyImages)]
+    // #2: 仅指定 begin_txindex, 导入的image: [begin_txindex, begin_txindex + len(keyImages)]
+    // #3: offset_txid, begin_txindex都指定, begin_txindex会被忽略, 导入的image: [offset_txid, offset_txid + len(keyImages)]
     public byte[][] importKeyImages(byte[] keyImages, String offsetTxid, String begin_txindex) {
         params = createHotWalletParams();
         params.add("import_key_images");

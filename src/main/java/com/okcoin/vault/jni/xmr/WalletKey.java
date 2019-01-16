@@ -10,8 +10,8 @@ public class WalletKey {
     String VIEW_KEY;
     String TARGET_ADDRESS;
 
-//    public static String XMR_VERSION = "013";
-    public static String XMR_VERSION = "";
+    public static String XMR_VERSION = "013";
+//    public static String XMR_VERSION = "";
 
     public static String XMR_LOG = "/Users/oak/go/src/github.com/okblockchainlab/javawallet/wallet_data/xmr/testnet/_xmr"
             + XMR_VERSION + ".json";

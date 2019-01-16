@@ -2,6 +2,7 @@ package com.okcoin.vault.jni.xmr;
 
 import com.okcoin.vault.jni.common.Util;
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.Native;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,11 +22,10 @@ class Moneroj implements Runnable {
     public static String WALLET_SO_PATH = "/Users/oak/go/src/github.com/okchain/monero_static" + WalletKey.XMR_VERSION +
     "/build/dynamic_on/src/simplewallet_so/libmonerod.dylib";
 
-    static {
+//    static {
         // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
         // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-        System.load(WALLET_SO_PATH);
-    }
+//    }
 
     public static final String XMR_VIEW_KEY    = "SecretViewKey";
     public static final String XMR_ADDRESS     = "ColdWalletAddress";
@@ -39,9 +39,8 @@ class Moneroj implements Runnable {
     public static final String XMR_UNLOCKED_BALANCE       = "UnlockedBalance";
     public static final String XMR_MAX_TXINDEX            = "MaxTxIndex";
 
-
-    public static boolean importKeyImages = true;
-    public static boolean exportKeyImagesByOutputs = true;
+    public static boolean importKeyImages = false;
+    public static boolean exportKeyImagesByOutputs = false;
     public static boolean getBalance_only = false;
     public static boolean export_outputs = false;
     public static boolean transfer = false;
@@ -57,17 +56,21 @@ class Moneroj implements Runnable {
     public static String logLevel = "4";
     public static String offsetTxid = "";
     public static String WALLET_NAME = "9sxx";
-    public static String TRANSFER_FEE = "unimportant"; //one of: "default", "unimportant", "normal", "elevated", "priority"
+    public static String TRANSFER_FEE = "priority"; //one of: "default", "unimportant", "normal", "elevated", "priority"
 
     public static void main(String[] args) {
 
+        System.load(WALLET_SO_PATH);
+
 //        WALLET_NAME = "A1pu";
-//        WALLET_NAME = "A2PZ";
-        WALLET_NAME = "9sxx";
-        WALLET_NAME = "9u7m";
+        WALLET_NAME = "A2PZ";
+//        WALLET_NAME = "9sxx";
+//        WALLET_NAME = "9u7m";
 
         logLevel = "4";
-        amount = "1";
+        amount = "0.1";
+
+        preferredTxid = "c8974e51412b35aaec5cad577a74b3844c1162d823687130151c74ad065cbb37";
 
 //        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
 //        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
@@ -88,12 +91,12 @@ class Moneroj implements Runnable {
 
 
 //        STORE_KEYS = false;
-        begin_txindex = "193";
+//        begin_txindex = "193";
         end_txindex = null;
 //        getBalance_only = true;
         export_outputs = true;
-//        exportKeyImagesByOutputs = false;
-//        importKeyImages = false;
+        exportKeyImagesByOutputs = true;
+        importKeyImages = true;
 
 //        transfer = true;
 //        sign = true;
@@ -144,8 +147,8 @@ class Moneroj implements Runnable {
                 Util.dump("create hot wallet", result);
             }
 
-//            byte[][] balanceList = h.getBalance();
-//            Util.dumpResult("getBalance", balanceList, false);
+            byte[][] balanceList = h.getBalance();
+            Util.dumpResult("getBalance", balanceList, false);
 
             if (getBalance_only) {
                 return;
@@ -271,16 +274,17 @@ class Moneroj implements Runnable {
                     System.out.printf("Failed to export keyImages. size<%d>\n", keyImagesResult.length);
                     return;
                 }
+
+                if (importKeyImages) {
+                    System.out.printf("========================================================================================\n");
+                    System.out.printf("============================== importKeyImages =========================================\n");
+                    System.out.printf("========================================================================================\n");
+
+                    byte[][] importResult = h.importKeyImages(keyImages, offsetTxid, beginTxindex);
+                    Util.dumpResult("importKeyImages", importResult, false);
+                }
             }
 
-            if (importKeyImages) {
-                System.out.printf("========================================================================================\n");
-                System.out.printf("============================== importKeyImages =========================================\n");
-                System.out.printf("========================================================================================\n");
-
-                byte[][] importResult = h.importKeyImages(keyImages, offsetTxid, beginTxindex);
-                Util.dumpResult("importKeyImages", importResult, false);
-            }
         }catch (UnsupportedEncodingException e) {
 
             System.out.println(e.getMessage());
