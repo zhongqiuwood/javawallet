@@ -63,15 +63,11 @@ class Moneroj implements Runnable {
 
         System.load(WALLET_SO_PATH);
 
-//        WALLET_NAME = "A1pu";
-        WALLET_NAME = "A2PZ";
-//        WALLET_NAME = "9sxx";
-//        WALLET_NAME = "9u7m";
 
         logLevel = "4";
         amount = "0.1";
 
-        preferredTxid = "ee883243b7ce6b4de465919c9c85b8431d10285ee5bf1712dfff785a8478aec1,3f62a2c3c1f1fd26255c506212c9da3d25e72edefdfa0765728e2f6336b08711";
+//        preferredTxid = "ee883243b7ce6b4de465919c9c85b8431d10285ee5bf1712dfff785a8478aec1,3f62a2c3c1f1fd26255c506212c9da3d25e72edefdfa0765728e2f6336b08711";
 
 //        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
 //        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
@@ -91,6 +87,8 @@ class Moneroj implements Runnable {
 //        ;
 
 
+//        WALLET_NAME = "A2PZ";
+        WALLET_NAME = "9u7m";
 //        STORE_KEYS = false;
 //        begin_txindex = "193";
         end_txindex = null;
@@ -98,8 +96,7 @@ class Moneroj implements Runnable {
         export_outputs = true;
 //        exportKeyImagesByOutputs = true;
 //        importKeyImages = true;
-
-        transfer = true;
+//        transfer = true;
 //        sign = true;
 //        submit = true;
 
@@ -140,7 +137,6 @@ class Moneroj implements Runnable {
 //            if (true) {
 //                return;
 //            }
-
 
             Hot h  = new Hot();
             result = h.createWallet();

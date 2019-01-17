@@ -56,19 +56,19 @@ public class WalletKey {
             SPEND_KEY      = "d7a66a48134551b44739f372ae42c2ce9675cb86286e5c69d07e47d90ff3b308";
             TARGET_ADDRESS = "9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj";
 
-        } else if (name.compareToIgnoreCase("9sXX") == 0) {
-
-            ADDRESS        = "9sXXpRtxYgh5yMYexKccr4dx35JM8rc1e8M7UDBfFCQmSgau1mQxTLk3j8MStt4CCnd8C99BGTw9uQ4DqhwtKq8r32pBpxe";
-            SPEND_KEY      = "cac0eb97cddd955c7ef0a992c44077bbb875221845889afad1d4e761e045740e";
-            VIEW_KEY       = "512330f6544e50a3ad233f3b23a44eea2f7a78d16d20c2d4ed3d74eb07627806";
-            TARGET_ADDRESS = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
-
-        } else if (name.compareToIgnoreCase("A1pu") == 0) {
-
-            ADDRESS        = "A1puKBLCKkdgB8D2LkGzQPYU8mYjVohwEgoAqcLKjQ2PCgAci6T5wMsVHhXekcPP7sEYqkR4KBGddAbErMTJhd737f9oAAD";
-            SPEND_KEY      = "fd4f1b209f2c1d6657d856e27055fd4a03619140c2ff19ff08eee70fff43500d";
-            VIEW_KEY       = "b0012956e57c6261bd8b91daa8c8c8b605aee403f8c1ef436728c3e060e8d40d";
-            TARGET_ADDRESS = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
+//        } else if (name.compareToIgnoreCase("9sXX") == 0) {
+//
+//            ADDRESS        = "9sXXpRtxYgh5yMYexKccr4dx35JM8rc1e8M7UDBfFCQmSgau1mQxTLk3j8MStt4CCnd8C99BGTw9uQ4DqhwtKq8r32pBpxe";
+//            SPEND_KEY      = "cac0eb97cddd955c7ef0a992c44077bbb875221845889afad1d4e761e045740e";
+//            VIEW_KEY       = "512330f6544e50a3ad233f3b23a44eea2f7a78d16d20c2d4ed3d74eb07627806";
+//            TARGET_ADDRESS = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
+//
+//        } else if (name.compareToIgnoreCase("A1pu") == 0) {
+//
+//            ADDRESS        = "A1puKBLCKkdgB8D2LkGzQPYU8mYjVohwEgoAqcLKjQ2PCgAci6T5wMsVHhXekcPP7sEYqkR4KBGddAbErMTJhd737f9oAAD";
+//            SPEND_KEY      = "fd4f1b209f2c1d6657d856e27055fd4a03619140c2ff19ff08eee70fff43500d";
+//            VIEW_KEY       = "b0012956e57c6261bd8b91daa8c8c8b605aee403f8c1ef436728c3e060e8d40d";
+//            TARGET_ADDRESS = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
 
         } else if (name.compareToIgnoreCase("9u7M") == 0) {
 
