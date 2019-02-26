@@ -67,7 +67,7 @@ Makefile.am.user
 *.a
 *.pb.cc
 *.pb.h
-
+*.h
 *.log
 *.trs
 *.dmg
