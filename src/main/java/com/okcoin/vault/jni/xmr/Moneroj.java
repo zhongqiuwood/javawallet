@@ -23,10 +23,6 @@ class Moneroj implements Runnable {
     public static String WALLET_SO_PATH = "/Users/oak/go/src/github.com/okchain/monero_static" + WalletKey.XMR_VERSION +
     "/build/dynamic_on/src/simplewallet_so/libmonerod.dylib";
 
-//    static {
-        // linux: github.com/monero-project/monero/build/debug/src/wallet/libwallet.so
-        // mac:   github.com/monero-project/monero/build/debug/src/wallet/libwallet.dylib
-//    }
 
     public static final String XMR_VIEW_KEY    = "SecretViewKey";
     public static final String XMR_ADDRESS     = "ColdWalletAddress";
@@ -48,7 +44,6 @@ class Moneroj implements Runnable {
     public static boolean sign = false;
     public static boolean submit = false;
 
-
     public static String begin_txindex = "";
     public static String end_txindex = "";
     public static String preferredTxid = "";
@@ -62,13 +57,10 @@ class Moneroj implements Runnable {
     public static void main(String[] args) {
 
         System.load(WALLET_SO_PATH);
-
-
         logLevel = "4";
         amount = "0.1";
 
 //        preferredTxid = "ee883243b7ce6b4de465919c9c85b8431d10285ee5bf1712dfff785a8478aec1,3f62a2c3c1f1fd26255c506212c9da3d25e72edefdfa0765728e2f6336b08711";
-
 //        offsetTxid = "efdb5179e9efa6f0a1cad848df99c574e2f5c49570890664f0150fe0821a8208"; // 171
 //        offsetTxid = "27681366ae050457d866b79c3e6dc1b83bc7106010b5633a58f3e8c76445905a"; //170
 //        offsetTxid = "17d0be4d322142fcab59662886e315bca2f3e269c733da97e956e9894a45e630"; //169
@@ -86,19 +78,15 @@ class Moneroj implements Runnable {
 //        +",3329fb7a14907c0916b5a177f11658a366740a7593d970ecee095929b8fcfe38"
 //        ;
 
-
 //        WALLET_NAME = "A2PZ";
         WALLET_NAME = "9u7m";
-//        STORE_KEYS = false;
-//        begin_txindex = "193";
         end_txindex = null;
-//        getBalance_only = true;
         export_outputs = true;
-//        exportKeyImagesByOutputs = true;
-//        importKeyImages = true;
-//        transfer = true;
-//        sign = true;
-//        submit = true;
+        exportKeyImagesByOutputs = true;
+        importKeyImages = true;
+        transfer = true;
+        sign = true;
+        submit = true;
 
         try {
             WalletKey wkey = new WalletKey(WALLET_NAME);
@@ -119,24 +107,11 @@ class Moneroj implements Runnable {
         }
     }
 
-
-
     public void run()
     {
         try {
             String[] result;
             Cold c = new Cold();
-
-//            result = c.createWallet();
-//            if (result != null) {
-//                Util.dump("create Cold wallet", result);
-//            }
-//
-//            byte[][] balanceList2 = c.getBalance();
-//            Util.dumpResult("getBalance", balanceList2, false);
-//            if (true) {
-//                return;
-//            }
 
             Hot h  = new Hot();
             result = h.createWallet();
@@ -153,85 +128,19 @@ class Moneroj implements Runnable {
 
             if (export_outputs) {
                 exportAndImport(c, h, offsetTxid, begin_txindex, end_txindex);
-//                balanceList = h.getBalance();
-//                Util.dumpResult("getBalance", balanceList, false);
             }
 
             if (!transfer) {
                 return;
             }
 
-            System.out.printf("========================================================================================\n");
-            System.out.printf("============================== produceUnsignedTx =======================================\n");
-            System.out.printf("========================================================================================\n");
+            byte[] unsignedTx = transfer(h);
 
-            byte[][] unsignedTxRes = h.produceUnsignedTx(Moneroj.TARGET_ADDRESS, TRANSFER_FEE, amount, preferredTxid);
-            Util.dumpResult("produceUnsignedTx", unsignedTxRes, true);
-
-            byte[] err = Util.getResultBySchema(XMR_ERROR, unsignedTxRes);
-            byte[] unsignedTx = null;
-            if (err == null) {
-                unsignedTx = Util.getResultBySchema(XMR_UNSIGNED_TX, unsignedTxRes);
-                if (unsignedTx == null || unsignedTx.length == 0) {
-                    System.out.printf("Failed to produce unsigned_monero_tx. size<%d>\n", unsignedTx.length);
-                    return;
-                }
-                System.out.printf("unsigned_monero_tx returned. size<%d>\n", unsignedTx.length);
-            } else {
+            if (!sign) {
                 return;
             }
 
-            List<String> inputTxidList = Util.getResultListBySchema(XMR_TX_ID, unsignedTxRes);
-
-            for (String inputTxid : inputTxidList) {
-                System.out.printf("input txid <%s>\n", inputTxid);
-            }
-
-//            boolean signAsync = true;
-//            signAsync = false;
-//
-//            if (signAsync) {
-//
-//                int concurrent = 3;
-//                ExecutorService fixedThreadPool = Executors.newFixedThreadPool(concurrent);
-//                for (int i = 0; i < concurrent; ++i) {
-//                    fixedThreadPool.execute(new ActionSign(c, unsignedTx));
-//                }
-//
-//                fixedThreadPool.shutdown();
-//            }
-
-            if (sign) {
-                System.out.printf("============================== signTransaction =========================================\n");
-                System.out.printf("========================================================================================\n");
-
-                byte[][] signResult = c.signTransaction(unsignedTx);
-                Util.dumpResult("signTransaction", signResult, true);
-
-                byte[] signedTx = Util.getResultBySchema(XMR_SIGNED_TX, signResult);
-                byte[] txidByte = Util.getResultBySchema(XMR_TX_ID, signResult);
-
-                String txid = Util.byteArray2String(txidByte);
-
-                System.out.printf("signTransaction returned. %s <%s>, %s size<%d>\n",
-                        XMR_TX_ID,
-                        txid,
-                        XMR_SIGNED_TX,
-                        signedTx.length);
-
-                if (signedTx.length == 0) {
-                    System.out.printf("Failed to sign tx. size<%d>\n", signedTx.length);
-                    return;
-                }
-
-                if (submit) {
-                    byte[][] submitResult = h.submitTransaction(signedTx);
-                    System.out.printf("submitResult returned. size<%d>\n", submitResult.length);
-
-                    Util.dumpResult("submitResult", submitResult, false);
-
-                }
-            }
+            sign(c, h, unsignedTx);
 
         } catch (UnsupportedEncodingException e) {
 
@@ -241,6 +150,68 @@ class Moneroj implements Runnable {
             System.out.println("// catch Exception");
             System.out.println(e.getMessage());
         }
+    }
+
+    void sign(Cold c, Hot h, byte[] unsignedTx) {
+        System.out.printf("============================== signTransaction =========================================\n");
+        System.out.printf("========================================================================================\n");
+
+        byte[][] signResult = c.signTransaction(unsignedTx);
+        Util.dumpResult("signTransaction", signResult, true);
+
+        byte[] signedTx = Util.getResultBySchema(XMR_SIGNED_TX, signResult);
+        byte[] txidByte = Util.getResultBySchema(XMR_TX_ID, signResult);
+
+        String txid = Util.byteArray2String(txidByte);
+
+        System.out.printf("signTransaction returned. %s <%s>, %s size<%d>\n",
+                XMR_TX_ID,
+                txid,
+                XMR_SIGNED_TX,
+                signedTx.length);
+
+        if (signedTx.length == 0) {
+            System.out.printf("Failed to sign tx. size<%d>\n", signedTx.length);
+            return;
+        }
+
+        if (submit) {
+            byte[][] submitResult = h.submitTransaction(signedTx);
+            System.out.printf("submitResult returned. size<%d>\n", submitResult.length);
+
+            Util.dumpResult("submitResult", submitResult, false);
+        }
+    }
+    byte[] transfer(Hot h) {
+
+        System.out.printf("========================================================================================\n");
+        System.out.printf("============================== produceUnsignedTx =======================================\n");
+        System.out.printf("========================================================================================\n");
+
+
+        byte[][] unsignedTxRes = h.produceUnsignedTx(Moneroj.TARGET_ADDRESS, TRANSFER_FEE, amount, preferredTxid);
+        Util.dumpResult("produceUnsignedTx", unsignedTxRes, true);
+
+        byte[] err = Util.getResultBySchema(XMR_ERROR, unsignedTxRes);
+        byte[] unsignedTx = null;
+        if (err == null) {
+            unsignedTx = Util.getResultBySchema(XMR_UNSIGNED_TX, unsignedTxRes);
+            if (unsignedTx == null || unsignedTx.length == 0) {
+                System.out.printf("Failed to produce unsigned_monero_tx. size<%d>\n", unsignedTx.length);
+                return null;
+            }
+            System.out.printf("unsigned_monero_tx returned. size<%d>\n", unsignedTx.length);
+        } else {
+            return null;
+        }
+
+        List<String> inputTxidList = Util.getResultListBySchema(XMR_TX_ID, unsignedTxRes);
+
+        for (String inputTxid : inputTxidList) {
+            System.out.printf("input txid <%s>\n", inputTxid);
+        }
+
+        return unsignedTx;
     }
 
     void exportAndImport(Cold c, Hot h, String offsetTxid, String beginTxindex, String endTxindex) {
