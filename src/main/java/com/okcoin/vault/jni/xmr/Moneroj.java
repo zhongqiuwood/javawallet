@@ -20,8 +20,10 @@ class Moneroj implements Runnable {
     public static String TARGET_ADDRESS;
 
 
-    public static String WALLET_SO_PATH = "/Users/oak/go/src/github.com/okchain/monero_static" + WalletKey.XMR_VERSION +
-    "/build/dynamic_on/src/simplewallet_so/libmonerod.dylib";
+
+//    public static String MONERO_SRC_TOP = "/Users/oak/go/src/github.com/okchain/monero_static" + WalletKey.XMR_VERSION;
+    public static String MONERO_SRC_TOP = "/Users/oak/go/src/github.com/okblockchainlab/monero";
+    public static String WALLET_SO_PATH = MONERO_SRC_TOP + "/build/dynamic_on/src/simplewallet_so/libmonerod.dylib";
 
 
     public static final String XMR_VIEW_KEY    = "SecretViewKey";
