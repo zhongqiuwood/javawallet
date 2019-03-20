@@ -52,9 +52,9 @@ class Cold extends WalletBase {
 //    }
 
     protected void setDaemonAddress(List<String> p) {
-        // cold wallet connects nobody
-//        p.add("--daemon-address");
-//        p.add("");
+//         cold wallet connects nobody
+        p.add("--daemon-address");
+        p.add("dummy:10000");
     }
 
     public byte[][] getBalance() {
