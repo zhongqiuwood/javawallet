@@ -70,6 +70,13 @@ public class WalletKey {
 //            VIEW_KEY       = "b0012956e57c6261bd8b91daa8c8c8b605aee403f8c1ef436728c3e060e8d40d";
 //            TARGET_ADDRESS = "A2PZyjDZT1JjnmdSXAsPb5hv9ne7Tty9b2qaLrw7s3zSMsxAsd8fcAoVWt2xFapSX4UYDce7gDeHjXRyKb5t45TcGhYmY9y";
 
+        } else if (name.compareToIgnoreCase("9zh8") == 0) {
+
+            ADDRESS        = "9zh8CqvXyNQQumvdJasVGeUdoM6upTg6SPrHjiMzrBAU2MUQ1G6QjZUBBfzupr8aVm18pWY6wPAY8C47bQP425bW9fSiSLD";
+            SPEND_KEY      = "cc9190965a248b3ae72243477fa78fdece29d503775c4334b84f39e68f5f6204";
+            VIEW_KEY       = "2ddd194cddb11ad9c10ffe8aee9d18166acf6809c7c2afc305ff387734a14c02";
+            TARGET_ADDRESS = "9xECS9eCnqM9oo2iuZoN2kHkm5ph4gDwVjnp9CvizbwZdtReX6atSjx6312n8s8WssSrYy92pxCsR5M2kPFzKuAC23NnpPA";
+
         } else if (name.compareToIgnoreCase("9u7M") == 0) {
 
             ADDRESS        = "9u7McB2tQJQQbd2jrncdRW43m72Y5vbrQDt459FQB7SHbyCCnwuaBhSgvmdnQykqQecpguE8Csnms9nzoAK5QxzMGF75xqj";
